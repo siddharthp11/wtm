@@ -7,7 +7,6 @@ class Event{
         this.date = date;
         this.tag = tag;
         this.isMove = isMove;
-        this.popupVisible = false;
     }
 }
 

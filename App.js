@@ -91,15 +91,14 @@ const App = () => {
   }
 
    // Pop Up Handling Variables
-  const [isPopUpVisible, setPopUpVisible] = useState(false);
+  const [visiblePopUp, setVisiblePopUp] = useState(-1);
 
   const openPopUp = (item) => {
-    item.popupVisible = true;
-    // setPopUpVisible(true);
+    setVisiblePopUp(item.id);
   };
 
-  const closePopUp = (item) => {
-    item.popupVisible = false;
+  const closePopUp = () => {
+    setVisiblePopUp(-1);
   };
 
   const PopUp = (props) => {
@@ -131,7 +130,7 @@ const App = () => {
             <Text style={styles.textInListItem}>{item.name}</Text>
           </View>
         </TouchableOpacity>
-        <PopUp visible={item.popupVisible} onClose={() => closePopUp(item)} item={item} />
+        <PopUp visible={item.id == visiblePopUp} onClose={() => closePopUp()} item={item} />
       </View>
     );
     return (
