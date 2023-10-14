@@ -3,9 +3,9 @@ import Event from '../data-models/event-model';
 
 class FirebaseAPI {
   // Method to add an event
-  static async addEvent(eventName) {
+  static async addEvent(event) {
     try {
-      await db.collection('Events').add({ name: eventName });
+      await db.collection('OtherEvents').add(event.toFirestore());
       console.log('Event added successfully');
     } catch (error) {
       console.log('Error adding event:', error);
