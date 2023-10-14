@@ -7,7 +7,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 import React, { useEffect, useState } from 'react';
 import FirebaseAPI from './src/firebase/firebaseAPI'
 import {Text, View, SafeAreaView, FlatList, StyleSheet, Dimensions} from 'react-native';
-
+import { FloatingAction } from "react-native-floating-action";
+import { Button } from 'react-native';
 
 const App = () => {
   const [events, setEvents] = useState([]);
@@ -25,6 +26,11 @@ const App = () => {
       top: 0.1 * windowHeight,
       left: 0.1 * windowWidth,
       width: 0.9 * windowWidth
+    },
+    createEventButton: {
+      position: 'absolute',
+      bottom: 0.5 * windowHeight,
+      right: 0.5 * windowWidth
     },
     listItem: {
       alignItems: 'center',
@@ -62,6 +68,7 @@ const App = () => {
           renderItem={(event) => <ListItem item={event.item} />}
           keyExtractor={(event) => event.id}
         />
+        <Button title="Create an Event" onPress={console.log("Creating Event")} />
       </SafeAreaView>
     );
   } else {
