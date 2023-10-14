@@ -5,18 +5,22 @@ import styles from "./styles";
 import ListItem from "./components/ListItem";
 import FloatingActionButton from "./components/FloatingActionButton";
 
-const HomeScreen = ({navigation}) => {
+const HomeScreen = ({ navigation }) => {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchEvents = async () => {
-      const eventData = await FirebaseAPI.readEvents();
-      setEvents(eventData);
-      setLoading(false);
-    };
-    fetchEvents();
-  }, []);
+    const unsubscribe = navigation.addListener("focus", () => {
+      const fetchEvents = async () => {
+        const eventData = await FirebaseAPI.readEvents();
+        setEvents(eventData);
+        setLoading(false);
+      };
+      fetchEvents();
+    });
+
+    return unsubscribe;
+  }, [navigation]);
 
   if (!loading) {
     return (
@@ -27,7 +31,9 @@ const HomeScreen = ({navigation}) => {
           renderItem={(event) => <ListItem item={event.item} />}
           keyExtractor={(event) => event.id}
         />
-        <FloatingActionButton onPressItem = {() => navigation.navigate("Make a Move")}/>
+        <FloatingActionButton
+          onPressItem={() => navigation.navigate("Make a Move")}
+        />
       </SafeAreaView>
     );
   } else {
