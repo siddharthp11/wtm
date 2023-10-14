@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import styles from './styles';
 
 const CreateEventScreen = () => {
   const [eventName, setEventName] = useState('');
@@ -17,27 +18,34 @@ const CreateEventScreen = () => {
   };
 
   return (
-    <View>
-      <Text>Event Name:</Text>
+    <View style={styles.container}>
+      <View style={styles.inputContainer}>
+      <Text style={styles.textHeading}>Event Name:</Text>
       <TextInput
         placeholder="Enter Event Name"
         value={eventName}
         onChangeText={text => setEventName(text)}
       />
-
-      <Text>Event Location:</Text>
+      </View>
+      <View style={styles.inputContainer}>
+      <Text style={styles.textHeading}>Event Location:</Text>
       <TextInput
-        placeholder="Enter Event Location"
-        value={eventLocation}
-        onChangeText={text => setEventLocation(text)}
+          placeholder="Enter Event Location"
+          value={eventLocation}
+          onChangeText={text => setEventLocation(text)}
       />
+      </View>
 
-      <Text>Event Date:</Text>
-      <TextInput
-        placeholder="Select Event Date"
-        value={eventDate.toDateString()}
-        onTouchStart={() => setShowDatePicker(true)}
-      />
+      <View style={styles.inputContainer}>
+        <Text style={styles.textHeading}>Event Date:</Text>
+        <TextInput
+          placeholder="Select Event Date"
+          value={eventDate.toDateString()}
+          caretHidden={true} // Hide the cursor
+          selection={{ start: 0, end: 0 }} // Hide text selection
+          onTouchStart={() => setShowDatePicker(true)}
+        />
+      </View>
 
       {showDatePicker && (
         <DateTimePicker
@@ -54,12 +62,16 @@ const CreateEventScreen = () => {
         />
       )}
 
-      <Text>Event Time:</Text>
-      <TextInput
-      placeholder="Select Event Time"
-      value={eventDate.toTimeString()}
-      onTouchStart={() => setShowTimePicker(true)}
-      />
+      <View style={styles.inputContainer}>
+          <Text style={styles.textHeading}>Event Time:</Text>
+          <TextInput
+          placeholder="Select Event Time"
+          value={eventDate.toTimeString()}
+          caretHidden={true} // Hide the cursor
+          selection={{ start: 0, end: 0 }} // Hide text selection
+          onTouchStart={() => setShowTimePicker(true)}
+          />
+      </View>
 
       {showTimePicker && (
       <DateTimePicker
@@ -76,14 +88,16 @@ const CreateEventScreen = () => {
       />
       )}
 
-      <Text>Event Tag:</Text>
-      <TextInput
-        placeholder="Enter Event Tag"
-        value={eventTag}
-        onChangeText={text => setEventTag(text)}
-      />
+      <View style={styles.inputContainer}>
+        <Text style={styles.textHeading}>Event Tag:</Text>
+        <TextInput
+          placeholder="Enter Event Tag"
+          value={eventTag}
+          onChangeText={text => setEventTag(text)}
+        />
+      </View>
 
-      <Button
+      <Button style={styles.createEventButton}
         title="Create Event"
         onPress={handleCreateEvent}
       />
