@@ -5,6 +5,5 @@ import firebaseConfig from "../../keys/firebase_key.json"; // Adjust the path to
 
 
 const app = firebase.initializeApp(firebaseConfig);
-console.log(app)
 const db = firebase.firestore();
 export { app, db }
