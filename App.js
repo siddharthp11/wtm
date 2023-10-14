@@ -6,12 +6,38 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import React, { useEffect, useState } from 'react';
 import FirebaseAPI from './src/firebase/firebaseAPI'
-import {Text, View, SafeAreaView, FlatList} from 'react-native';
+import {Text, View, SafeAreaView, FlatList, StyleSheet, Dimensions} from 'react-native';
 
 
 const App = () => {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const windowWidth = Dimensions.get('window').width;
+  const windowHeight = Dimensions.get('window').height;
+
+  const styles = StyleSheet.create({
+    container: {
+      marginTop: 50,
+    },
+    list: {
+      position: 'absolute',
+      top: 0.1 * windowHeight,
+      left: 0.1 * windowWidth,
+      width: 0.9 * windowWidth
+    },
+    listItem: {
+      alignItems: 'center',
+      padding: 0.01 * windowHeight,
+      width: 0.8 * 0.9 * windowWidth,
+      height: 0.1 * windowHeight,
+      color: 'black',
+      borderColor: 'black',
+      borderRadius: 5,
+      borderWidth: 1,
+      margin: 10
+    }
+  });
 
   useEffect(() => {
     const fetchEvents = async () => {
@@ -23,16 +49,17 @@ const App = () => {
   }, []);
 
   if (!loading){
-    const ListItem = ({name}) => (
+    const ListItem = ({item}) => (
       <View>
-        <Text>{name}</Text>
+        <Text style={styles.listItem}>{item.name}</Text>
       </View>
     );
     return (
       <SafeAreaView>
         <FlatList
+          style={styles.list}
           data={events}
-          renderItem={(event) => <ListItem name={event.item.name} />}
+          renderItem={(event) => <ListItem item={event.item} />}
           keyExtractor={(event) => event.id}
         />
       </SafeAreaView>
