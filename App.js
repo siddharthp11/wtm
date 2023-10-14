@@ -20,20 +20,15 @@ const App = () => {
   const styles = StyleSheet.create({
     container: {
       marginTop: 50,
+      display: 'flex',
+      flex: 1,
+      // flexDirection: 'column'
     },
     list: {
       position: 'absolute',
-      top: 0.1 * windowHeight,
-      left: 0.1 * windowWidth,
-      width: 0.9 * windowWidth
-    },
-    createEventButton: {
-      position: 'absolute',
-      bottom: 0.5 * windowHeight,
-      right: 0.5 * windowWidth
+      width: 0.9 * windowWidth,
     },
     listItem: {
-      alignItems: 'center',
       padding: 0.01 * windowHeight,
       width: 0.8 * 0.9 * windowWidth,
       height: 0.1 * windowHeight,
@@ -42,7 +37,20 @@ const App = () => {
       borderRadius: 5,
       borderWidth: 1,
       margin: 10
-    }
+    },
+    createEventButton: {
+      position: 'absolute',
+      bottom: 10,
+      right: 10,
+      // margin: 20,
+      width: 100, // or adjust the width as needed
+      height: 100, // or adjust the height as needed
+      // borderRadius: 40, // to make it a circle
+      // backgroundColor: 'blue', // customize the background color
+      alignItems: 'center',
+      justifyContent: 'center',
+      fill: 'none'
+    },
   });
 
   useEffect(() => {
@@ -61,14 +69,25 @@ const App = () => {
       </View>
     );
     return (
-      <SafeAreaView>
+      <SafeAreaView style={styles.container}>
         <FlatList
           style={styles.list}
           data={events}
           renderItem={(event) => <ListItem item={event.item} />}
           keyExtractor={(event) => event.id}
         />
-        <Button title="Create an Event" onPress={console.log("Creating Event")} />
+        <View style={styles.createEventButton}>
+          <FloatingAction
+          actions={[{text: "Accessibility",
+              // icon: require("./images/ic_accessibility_white.png"),
+              name: "bt_accessibility",
+              position: 2
+            }]}
+          onPressItem={name => {
+            console.log(`selected button: ${name}`);
+          }}
+          />
+        </View>
       </SafeAreaView>
     );
   } else {
