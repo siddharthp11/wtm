@@ -3,8 +3,10 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, Button } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import styles from './styles';
+import Event from '../../data-models/event-model';
+import FirebaseAPI from '../../firebase/firebaseAPI';
 
-const CreateEventScreen = () => {
+const CreateEventScreen = ({navigation}) => {
   const [eventName, setEventName] = useState('');
   const [eventLocation, setEventLocation] = useState('');
   const [eventDate, setEventDate] = useState(new Date());
@@ -14,14 +16,16 @@ const CreateEventScreen = () => {
   const [showTimePicker, setShowTimePicker] = useState(false);
 
   const handleCreateEvent = () => {
-    // Handle event creation logic, e.g., save data to Firebase
+    const createdEvent = new Event("", eventName, eventLocation, eventDate, eventTag, true);
+    FirebaseAPI.addEvent(createdEvent);
+    navigation.navigate("What's the Move?")
   };
 
   return (
     <View style={styles.container}>
       <View style={styles.inputContainer}>
       <Text style={styles.textHeading}>Event Name:</Text>
-      <TextInput
+      <TextInput style={styles.input}
         placeholder="Enter Event Name"
         value={eventName}
         onChangeText={text => setEventName(text)}
@@ -29,7 +33,7 @@ const CreateEventScreen = () => {
       </View>
       <View style={styles.inputContainer}>
       <Text style={styles.textHeading}>Event Location:</Text>
-      <TextInput
+      <TextInput style={styles.input}
           placeholder="Enter Event Location"
           value={eventLocation}
           onChangeText={text => setEventLocation(text)}
@@ -38,7 +42,7 @@ const CreateEventScreen = () => {
 
       <View style={styles.inputContainer}>
         <Text style={styles.textHeading}>Event Date:</Text>
-        <TextInput
+        <TextInput style={styles.input}
           placeholder="Select Event Date"
           value={eventDate.toDateString()}
           caretHidden={true} // Hide the cursor
@@ -64,7 +68,7 @@ const CreateEventScreen = () => {
 
       <View style={styles.inputContainer}>
           <Text style={styles.textHeading}>Event Time:</Text>
-          <TextInput
+          <TextInput style={styles.input}
           placeholder="Select Event Time"
           value={eventDate.toTimeString()}
           caretHidden={true} // Hide the cursor
@@ -90,7 +94,7 @@ const CreateEventScreen = () => {
 
       <View style={styles.inputContainer}>
         <Text style={styles.textHeading}>Event Tag:</Text>
-        <TextInput
+        <TextInput style={styles.input}
           placeholder="Enter Event Tag"
           value={eventTag}
           onChangeText={text => setEventTag(text)}
@@ -98,6 +102,7 @@ const CreateEventScreen = () => {
       </View>
 
       <Button style={styles.createEventButton}
+        disabled={eventName.length == 0 || eventLocation.length == 0}
         title="Create Event"
         onPress={handleCreateEvent}
       />

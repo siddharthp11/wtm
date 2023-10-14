@@ -29,6 +29,10 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
 
+    input: {
+      textAlign: 'center'
+    },
+
     createEventButton: {
         position: 'absolute',
         bottom: 0,
