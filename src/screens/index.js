@@ -1,5 +1,16 @@
-export { default as LoginScreen } from './LoginScreen/LoginScreen'
+import { createStackNavigator } from "@react-navigation/stack";
+import HomeScreen from "./HomeScreen/HomeScreen";
 
-export { default as HomeScreen } from './HomeScreen/HomeScreen'
+const InnerStack = createStackNavigator();
 
-export { default as RegistrationScreen } from './RegistrationScreen/RegistrationScreen'
+export default function InsideLayout() {
+  return (
+    <InnerStack.Navigator initialRouteName="Home">
+      <InnerStack.Screen
+        name="HomeScreen"
+        component={HomeScreen}
+        options={{ headerShown: false }}
+      ></InnerStack.Screen>
+    </InnerStack.Navigator>
+  );
+}
