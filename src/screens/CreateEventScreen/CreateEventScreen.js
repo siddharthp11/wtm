@@ -1,6 +1,6 @@
 import { View, Text } from "react-native";
 
-const LoginScreen = () => {
+const CreateEventScreen = () => {
     return (
         <View>
             <Text>test</Text>
@@ -8,4 +8,4 @@ const LoginScreen = () => {
     )
 }
 
-export default LoginScreen;
+export default CreateEventScreen;
