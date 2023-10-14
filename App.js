@@ -6,7 +6,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import React, { useEffect, useState } from 'react';
 import FirebaseAPI from './src/firebase/firebaseAPI'
-import {Text, View, SafeAreaView, FlatList, StyleSheet, Dimensions} from 'react-native';
+import {Text, View, SafeAreaView, FlatList, StyleSheet, Dimensions, TouchableOpacity, Modal} from 'react-native';
 import { FloatingAction } from "react-native-floating-action";
 import { Button } from 'react-native';
 
@@ -26,17 +26,28 @@ const App = () => {
     },
     list: {
       position: 'absolute',
-      width: 0.9 * windowWidth,
+      width: 1.0 * windowWidth
+      // alignItems: 'center'
     },
     listItem: {
-      padding: 0.01 * windowHeight,
-      width: 0.8 * 0.9 * windowWidth,
+      flex: 1,
+      justifyContent: 'center',
+      // alignContent: 'center',
+      marginTop: 10,
+      marginBottom: 10,
+      marginLeft: 30,
+      marginRight: 30,
+      // width: 0.8 * 0.9 * windowWidth,
       height: 0.1 * windowHeight,
       color: 'black',
       borderColor: 'black',
       borderRadius: 5,
       borderWidth: 1,
       margin: 10
+    },
+    textInListItem: {
+      textAlign: 'center', // Center text horizontally
+      color: 'black',
     },
     createEventButton: {
       position: 'absolute',
@@ -47,9 +58,22 @@ const App = () => {
       height: 100, // or adjust the height as needed
       // borderRadius: 40, // to make it a circle
       // backgroundColor: 'blue', // customize the background color
-      alignItems: 'center',
-      justifyContent: 'center',
+      // alignItems: 'center',
+      // justifyContent: 'center',
       fill: 'none'
+    },
+    centeredView: {
+      flex: 1,
+      justifyContent: "center",
+      alignItems: "center",
+    },
+    modalView: {
+      backgroundColor: "white",
+      borderRadius: 10,
+      padding: 20,
+      alignItems: "center",
+      borderColor: 'black',
+      borderWidth: 1,
     },
   });
 
@@ -62,10 +86,52 @@ const App = () => {
     fetchEvents()
   }, []);
 
+  handleEventPressed = () => {
+    console.log("Pressed");
+  }
+
+   // Pop Up Handling Variables
+  const [isPopUpVisible, setPopUpVisible] = useState(false);
+
+  const openPopUp = (item) => {
+    item.popupVisible = true;
+    // setPopUpVisible(true);
+  };
+
+  const closePopUp = (item) => {
+    item.popupVisible = false;
+  };
+
+  const PopUp = (props) => {
+    return (
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={props.visible}
+        onRequestClose={() => {
+          // Handle the modal close event if needed
+        }}
+      >
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <Text>Pop-up Content</Text>
+            <Text>{props.item.name}</Text>
+            <Button title="Close" onPress={props.onClose} />
+          </View>
+        </View>
+      </Modal>
+    );
+  };
+
   if (!loading){
     const ListItem = ({item}) => (
       <View>
-        <Text style={styles.listItem}>{item.name}</Text>
+        <TouchableOpacity onPress={() => openPopUp(item)}>
+          <View style={styles.listItem} onPressItem={(item) => {console.log(item.name)}}>
+            <Text style={styles.textInListItem}>{item.name}</Text>
+          </View>
+        </TouchableOpacity>
+        <PopUp visible={item.popupVisible} onClose={() => closePopUp(item)} item={item} />
       </View>
     );
     return (
@@ -78,6 +144,7 @@ const App = () => {
         />
         <View style={styles.createEventButton}>
           <FloatingAction
+          showBackground={false}
           actions={[{text: "Accessibility",
               // icon: require("./images/ic_accessibility_white.png"),
               name: "bt_accessibility",
