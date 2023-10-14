@@ -5,7 +5,7 @@ import styles from "./styles";
 import ListItem from "./components/ListItem";
 import FloatingActionButton from "./components/FloatingActionButton";
 
-const HomeScreen = () => {
+const HomeScreen = ({navigation}) => {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -27,7 +27,7 @@ const HomeScreen = () => {
           renderItem={(event) => <ListItem item={event.item} />}
           keyExtractor={(event) => event.id}
         />
-        <FloatingActionButton />
+        <FloatingActionButton onPressItem = {() => navigation.navigate("Make a Move")}/>
       </SafeAreaView>
     );
   } else {

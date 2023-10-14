@@ -4,7 +4,7 @@ import { FloatingAction } from "react-native-floating-action";
 import styles from '../styles'; 
 import { auth } from "../../../firebase/config";
 
-const FloatingActionButton = ({navigation}) => (
+const FloatingActionButton = (props) => (
   <View style={styles.createEventButton}>
     <FloatingAction
       showBackground={false}
@@ -14,10 +14,18 @@ const FloatingActionButton = ({navigation}) => (
           name: "logout",
           position: 2,
         },
+        {
+          text: "Something Else",
+          name: "something_else",
+          position: 1,
+        }
       ]}
       onPressItem={(name) => {
         if (name === 'logout'){
           auth.signOut()
+        } else {
+          console.log(name);
+          props.onPressItem()
         }
       }}
     />
