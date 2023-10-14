@@ -1,28 +1,45 @@
 import 'react-native-gesture-handler';
 
-import React, { useEffect, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import { LoginScreen, HomeScreen, RegistrationScreen } from './src/screens';
 
-
+import React, { useEffect, useState } from 'react';
 import FirebaseAPI from './src/firebase/firebaseAPI'
+import {Text, View, SafeAreaView, FlatList} from 'react-native';
 
-import {Text, View} from 'react-native';
 
-
-export default function App() {
+const App = () => {
+  const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [user, setUser] = useState(null)
 
+  useEffect(() => {
+    const fetchEvents = async () => {
+      const eventData = await FirebaseAPI.readEvents();
+      setEvents(eventData);
+      setLoading(false);
+    };
+    fetchEvents()
+  }, []);
 
-  //firebase check 
-  FirebaseAPI.readEvents()
+  if (!loading){
+    const ListItem = ({name}) => (
+      <View>
+        <Text>{name}</Text>
+      </View>
+    );
+    return (
+      <SafeAreaView>
+        <FlatList
+          data={events}
+          renderItem={(event) => <ListItem name={event.item.name} />}
+          keyExtractor={(event) => event.id}
+        />
+      </SafeAreaView>
+    );
+  } else {
+    return <View></View>
+  }
 
-  return (
-    <View style={{alignItems: 'center'}}>
- <Text> Hello i'm centered text</Text>
-</View>
-  )
 }
+export default App;
