@@ -17,7 +17,7 @@ export default function EventLocationScreen() {
                 return (
                     <Marker
                         key={index}
-                        pinColor='orange'
+                        pinColor='green'
                         coordinate={item.location}
                         title={item.name}
                         description={item.tag}
@@ -25,7 +25,7 @@ export default function EventLocationScreen() {
                         <Callout tooltip={true}>
                             <View style={styles.calloutView}>
                                 <Text style={styles.calloutText}>{item.name}</Text>
-                                <Text>{item.tag}</Text>
+                                <Text style={{ color: 'green' }}>{item.tag}</Text>
                             </View>
                         </Callout>
                     </Marker>
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
         height: "100%",
     },
     calloutView: {
-        backgroundColor: '#3d3d3d',
+        backgroundColor: 'blue',
         borderRadius: 20,
         width: 170,
         height: 100,
@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
         padding: 10,
     },
     calloutText: {
-        color: '#666',
+        color: 'orange',
         fontSize: 16,
     },
 })
