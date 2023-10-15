@@ -8,10 +8,11 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { useState, useEffect } from "react";
 
 import { auth } from "./src/firebase/config";
+import EventLocationScreen from "./src/screens/EventLocationScreen/EventLocationScreen";
 const Stack = createStackNavigator();
 
 const App = () => {
-  // return <MapScreen></MapScreen>;
+  return (<EventLocationScreen></EventLocationScreen>)
 
   const [user, setUser] = useState(null);
 
