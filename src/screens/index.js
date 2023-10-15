@@ -9,7 +9,7 @@ export default function InsideLayout() {
   return (
     <InnerStack.Navigator initialRouteName="Home">
       <InnerStack.Screen name="What's the Move?" component={HomeScreen} options={{ headerShown: false }} />
-      <InnerStack.Screen name="Make a Move" component={CreateEventScreen} />
+      <InnerStack.Screen name="Make a Move" component={CreateEventScreen} options={{ headerShown: false }} />
     </InnerStack.Navigator>
   );
 }
