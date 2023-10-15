@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     padding: 20,
     width: "80%",
     height: "80%",
-    alignItems: "center",
+    // alignItems: "center",
     borderColor: "black",
     borderWidth: 1,
   },

@@ -18,7 +18,6 @@ const ListItem = ({ item }) => {
     <View>
       <TouchableOpacity
         onPress={() => {
-          console.log(item);
           return openPopUp(item);
         }}
       >
