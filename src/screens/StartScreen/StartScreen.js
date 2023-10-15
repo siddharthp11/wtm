@@ -4,7 +4,7 @@ import { useFonts } from 'expo-font';
 
 
 
-export default function StartupScreen() {
+export default function StartScreen() {
 
   const [fontsLoaded] = useFonts({
     'font': require('../../../assets/fonts/mexcellent-rg.otf'),
