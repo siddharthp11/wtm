@@ -8,25 +8,8 @@ const FloatingActionButton = (props) => (
   <View style={styles.createEventButton}>
     <FloatingAction
       showBackground={false}
-      actions={[
-        {
-          text: "logout",
-          name: "logout",
-          position: 2,
-        },
-        {
-          text: "create event",
-          name: "create-event",
-          position: 1,
-        },
-      ]}
-      onPressItem={(name) => {
-        if (name === "logout") {
-          auth.signOut();
-        } else {
-          props.onPressItem();
-        }
-      }}
+      onPressMain={(name) => { props.onPressItem() }}
+
     />
   </View>
 );

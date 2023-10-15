@@ -60,7 +60,6 @@ const EventScreen = ({ navigation }) => {
             return <ListItem item={event.item} />;
           }}
           keyExtractor={(event) => {
-            console.log(event.date);
             return event.id;
           }}
         />
