@@ -1,5 +1,10 @@
 import { TextInput } from "react-native-gesture-handler";
-import { Button, ActivityIndicator, KeyboardAvoidingView } from "react-native";
+import {
+  Button,
+  ActivityIndicator,
+  KeyboardAvoidingView,
+  View,
+} from "react-native";
 import { useState } from "react";
 import styles from "../styles";
 import { auth } from "../../../firebase/config";
@@ -35,7 +40,7 @@ export default LoginCard = () => {
   };
 
   return (
-    <KeyboardAvoidingView>
+    <KeyboardAvoidingView style={styles.container}>
       <TextInput
         style={styles.input}
         value={email}
@@ -56,8 +61,16 @@ export default LoginCard = () => {
         <ActivityIndicator></ActivityIndicator>
       ) : (
         <>
-          <Button title="login" onPress={signIn}></Button>
-          <Button title="create account" onPress={signUp}></Button>
+          <View style={styles.buttonContainer}>
+            <Button title="login" onPress={signIn} color="black"></Button>
+          </View>
+          <View style={styles.buttonContainer}>
+            <Button
+              title="create account"
+              onPress={signUp}
+              color="black"
+            ></Button>
+          </View>
         </>
       )}
     </KeyboardAvoidingView>
