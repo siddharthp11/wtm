@@ -1,11 +1,38 @@
 import React, { useEffect, useState } from "react";
-import { SafeAreaView, FlatList, View } from "react-native";
+import { SafeAreaView, FlatList, View, Text } from "react-native";
 import FirebaseAPI from "../../firebase/firebaseAPI";
 import styles from "./styles";
 import ListItem from "./components/ListItem";
 import FloatingActionButton from "./components/FloatingActionButton";
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Icon from 'react-native-vector-icons/FontAwesome';
+
+const Tab = createBottomTabNavigator();
+
+const MapScreen = () => (
+  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+    <Text>Map</Text>
+  </View>
+);
+
+const EventScreen = () => (
+  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+    <Text>Events</Text>
+  </View>
+);
 
 const HomeScreen = ({ navigation }) => {
+  return (
+    <Tab.Navigator>
+      <Tab.Screen name="Map" component={MapScreen} options={{ headerShown: false, tabBarIcon:
+            <Icon name="map-pin" size={30} color='white' /> }}/>
+      <Tab.Screen name="Event" component={EventScreen} options={{ headerShown: false, tabBarIcon:
+            <Icon name="event" size={30} color='white' /> }}/>
+    </Tab.Navigator>
+  );
+};
+
+
 
   
 
@@ -42,5 +69,4 @@ const HomeScreen = ({ navigation }) => {
   // } else {
   //   return <View></View>;
   // }
-};
 export default HomeScreen;

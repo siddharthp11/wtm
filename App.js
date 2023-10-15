@@ -27,7 +27,7 @@ const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="StartLayout">
-        {user ? (
+        {!user ? (
           <Stack.Screen //should be when user exists
             name="InsideStack"
             component={InsideLayout}
