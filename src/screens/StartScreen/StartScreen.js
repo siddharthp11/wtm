@@ -79,18 +79,32 @@ export default function StartScreen() {
           useNativeDriver: false,
         }),
       ]).start()
+
+    const timer = setTimeout(() => {
+      setShowLoginButton(true);
+      navigation.navigate("Login Screen");
+    }, 5000);
+
+    return () => {
+      clearTimeout(timer);
+    };
   }, []);
 
   if (!fontsLoaded) {
     return undefined;
   }
 
-
   return (
     <View style={styles.container}>
-      <Animated.Text style={[styles.neon]}>
-        WTM
-      </Animated.Text>
+      <Animated.Text style={[styles.neon]}>WTM</Animated.Text>
+      {showLoginButton && (
+        <Button
+          title="Login"
+          onPress={() => {
+            navigation.navigate("Login Screen");
+          }}
+        ></Button>
+      )}
     </View>
   );
 }
