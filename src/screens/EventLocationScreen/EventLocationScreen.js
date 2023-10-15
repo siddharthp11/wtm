@@ -6,39 +6,41 @@ import FirebaseAPI from "../../firebase/firebaseAPI";
 import PopUp from "./components/PopUp";
 
 
-export default function EventLocationScreen() {
+export default function EventLocationScreen({ navigation }) {
 
     const [events, setEvents] = useState([]);
     const [loading, setLoading] = useState(true);
-
     useEffect(() => {
-        const fetchEvents = async () => {
-            let eventData = await FirebaseAPI.readEvents();
-            eventData = eventData.map((item, index) => {
-                return (
-                    <Marker
-                        key={index}
-                        pinColor='green'
-                        coordinate={item.location}
-                        title={item.name}
-                        description={item.tag}
-                    >
-                        <Callout tooltip={true}>
-                            {/* <View style={styles.calloutView}>
-                                <Text style={styles.calloutText}>{item.name}</Text>
-                                <Text style={{ color: 'green' }}>{item.tag}</Text>
-                            </View> */}
+        const unsubscribe = navigation.addListener("focus", () => {
+            const fetchEvents = async () => {
+                let eventData = await FirebaseAPI.readEvents();
+                eventData = eventData.map((item, index) => {
+                    return (
+                        <Marker
+                            key={index}
+                            pinColor='green'
+                            coordinate={item.location}
+                            title={item.name}
+                            description={item.tag}
+                        >
+                            <Callout tooltip={true}>
+                                {/* <View style={styles.calloutView}>
+                                    <Text style={styles.calloutText}>{item.name}</Text>
+                                    <Text style={{ color: 'green' }}>{item.tag}</Text>
+                                </View> */}
 
-                            <PopUp item={item}></PopUp>
-                        </Callout>
-                    </Marker>
-                );
-            });
-            setEvents(eventData);
-            setLoading(false);
-        };
-        fetchEvents();
-    }, []);
+                                <PopUp item={item}></PopUp>
+                            </Callout>
+                        </Marker>
+                    );
+                });
+                setEvents(eventData);
+                setLoading(false);
+            };
+            fetchEvents();
+        });
+        return unsubscribe;
+    }, [navigation]);
 
 
 
