@@ -33,7 +33,7 @@ const HomeScreen = ({ navigation }) => {
             return <ListItem item={event.item} />;
           }}
           keyExtractor={(event) => {
-            console.log(event);
+            console.log(event.date);
             return event.id;
           }}
         />

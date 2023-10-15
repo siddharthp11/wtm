@@ -59,23 +59,53 @@ const styles = StyleSheet.create({
     padding: 20,
     width: "80%",
     height: "80%",
-    alignItems: "center",
+    // alignItems: "center",
     borderColor: "black",
     borderWidth: 1,
+    // flex: 1,
+    // flexDirection: "column",
   },
   modalViewTitleText: {
+    // flex: 2,
     color: "orange",
     textShadowColor: "orange",
     textShadowOffset: { width: 0, height: 0 }, // Adjust the offset as needed
-    textShadowRadius: 10, // Adjust the radius to control the glow intensity
+    textShadowRadius: 30, // Adjust the radius to control the glow intensity
     fontSize: 25,
+    margin: 10,
+    textAlign: "center",
   },
   modalViewText: {
+    margin: 5,
+    marginLeft: 15,
+    // flex: 1,
     color: "orange",
     textShadowColor: "orange",
     textShadowOffset: { width: 0, height: 0 }, // Adjust the offset as needed
     textShadowRadius: 10, // Adjust the radius to control the glow intensity
     fontSize: 16,
+  },
+  modalViewCloseButtonView: {
+    position: "absolute",
+    margin: 5,
+    width: "30%",
+    height: 40,
+    bottom: 10,
+    left: 10,
+    // backgroundColor: "red",
+  },
+  modalViewCloseButton: {
+    backgroundColor: "red",
+  },
+  mapContainer: {
+    // margin: 5,
+    marginTop: 40,
+    marginBottom: 20,
+    alignItems: "center",
+    // flex: 3,
+    width: "100%",
+    height: "50%",
+    // backgroundColor: "black",
   },
 });
 
