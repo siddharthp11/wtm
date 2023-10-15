@@ -41,21 +41,23 @@ export default LoginCard = () => {
 
   return (
     <KeyboardAvoidingView style={styles.container}>
-      <TextInput
-        style={styles.input}
-        value={email}
-        placeholder="email"
-        autoCapitalize="none"
-        onChangeText={(text) => setEmail(text)}
-      ></TextInput>
-      <TextInput
-        style={styles.input}
-        value={password}
-        secureTextEntry={true}
-        placeholder="password"
-        autoCapitalize="none"
-        onChangeText={(text) => setPassword(text)}
-      ></TextInput>
+      <View styles={styles.inputContainer}>
+        <TextInput
+          style={styles.input}
+          value={email}
+          placeholder="email"
+          autoCapitalize="none"
+          onChangeText={(text) => setEmail(text)}
+        ></TextInput>
+        <TextInput
+          style={styles.input}
+          value={password}
+          secureTextEntry={true}
+          placeholder="password"
+          autoCapitalize="none"
+          onChangeText={(text) => setPassword(text)}
+        ></TextInput>
+      </View>
 
       {loading ? (
         <ActivityIndicator></ActivityIndicator>

@@ -5,8 +5,7 @@ import LoginCard from "./components/LoginCard";
 
 import { StyleSheet } from "react-native";
 
-export default function LoginScreen({ route, navigation}) {
-
+export default function LoginScreen({ route, navigation }) {
   const { color, font } = route.params;
 
   const windowWidth = Dimensions.get("window").width;
@@ -24,7 +23,7 @@ export default function LoginScreen({ route, navigation}) {
       height: 40,
       borderColor: "gray",
       borderWidth: 1,
-      margin: 10,
+      marginBottom: 30,
       paddingLeft: 10,
     },
     wtmText: {
@@ -32,7 +31,11 @@ export default function LoginScreen({ route, navigation}) {
       fontFamily: font,
       color: color,
       marginTop: 0.15 * windowHeight,
+      textShadowColor: color,
+      textShadowOffset: { width: 0, height: 0 },
+      textShadowRadius: 30,
     },
+    wtmContainer: {},
     buttonContainer: {
       backgroundColor: "white",
       borderRadius: 12,
@@ -48,7 +51,9 @@ export default function LoginScreen({ route, navigation}) {
   if (auth) {
     return (
       <View style={styles.container}>
-        <Text style={styles.wtmText}>WTM</Text>
+        <View style={styles.wtmContainer}>
+          <Text style={styles.wtmText}>WTM</Text>
+        </View>
         <LoginCard auth={auth}></LoginCard>
       </View>
     );

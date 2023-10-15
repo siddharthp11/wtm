@@ -17,6 +17,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     margin: 10,
     paddingLeft: 10,
+    color: "white",
   },
   wtmText: {
     fontSize: 90,
@@ -31,7 +32,16 @@ const styles = StyleSheet.create({
     height: 0.07 * windowHeight,
     justifyContent: "center",
     alignItems: "center",
-    marginBottom: 15,
+    marginBottom: 20,
+    marginTop: 10,
+  },
+  inputContainer: {
+    alignItems: "center",
+    justifyContent: "center",
+    position: "absolute",
+    top: 0.2 * windowHeight,
+    left: 0,
+    right: 0,
   },
 });
 
