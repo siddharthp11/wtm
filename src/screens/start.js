@@ -14,7 +14,11 @@ export default function StartLayout() {
         name="Start Screen"
         component={StartScreen}
       />
-      <StartStack.Screen name="Login Screen" component={LoginScreen} />
+      <StartStack.Screen
+        name="Login Screen"
+        component={LoginScreen}
+        options={{ headerLeft: null, headerShown: false }}
+      />
     </StartStack.Navigator>
   );
 }
