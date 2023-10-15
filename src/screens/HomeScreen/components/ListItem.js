@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { TouchableOpacity, View, Text } from "react-native";
-import styles from '../styles'; 
+import styles from "../styles";
 import PopUp from "./PopUp";
 
 const ListItem = ({ item }) => {
@@ -16,7 +16,12 @@ const ListItem = ({ item }) => {
 
   return (
     <View>
-      <TouchableOpacity onPress={() => openPopUp(item)}>
+      <TouchableOpacity
+        onPress={() => {
+          console.log(item);
+          return openPopUp(item);
+        }}
+      >
         <View style={styles.listItem}>
           <Text style={styles.textInListItem}>{item.name}</Text>
         </View>
