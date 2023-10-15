@@ -2,8 +2,7 @@ import { StyleSheet, Dimensions } from "react-native";
 
 const styles = StyleSheet.create({
   container: {
-    // marginTop: 20,
-    // display: "flex",
+    backgroundColor: "black",
     flexDirection: "column",
     flex: 1,
     padding: 20,
@@ -13,11 +12,14 @@ const styles = StyleSheet.create({
   },
 
   textHeading: {
+    color: "orange",
+    textShadowColor: "orange",
+    textShadowOffset: { width: 0, height: 0 }, // Adjust the offset as needed
+    textShadowRadius: 30, // Adjust the radius to control the glow intensity
     fontSize: 20,
     fontWeight: "bold",
     paddingBottom: 5,
   },
-
   inputContainer: {
     // width: Dimensions.get("window").width * 0.9,
     // height: 55,
@@ -26,10 +28,11 @@ const styles = StyleSheet.create({
     // flex: 1,
     // // paddingLeft: 10,
     // // paddingRight: 10,
-    // borderBottomColor: "darkgrey",
-    // borderBottomWidth: 1,
+    borderBottomColor: "orange",
+    borderBottomWidth: 0.2,
     justifyContent: "center",
-    alignItems: "center",
+    // alignItems: "center",
+    paddingLeft: 50,
     flex: 1,
   },
   mapContainer: {
@@ -39,12 +42,15 @@ const styles = StyleSheet.create({
     // backgroundColor: "black",
   },
   input: {
-    textAlign: "center",
+    // textAlign: "center",
+    paddingLeft: 10,
+    color: "orange",
   },
 
   createEventButton: {
+    flex: 1,
     bottom: -40,
-    left: Dimensions.get("window").width * 0.5,
+    // left: Dimensions.get("window").width * 0.5,
   },
 });
 
