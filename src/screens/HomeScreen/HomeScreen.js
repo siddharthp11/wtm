@@ -18,8 +18,10 @@ const EventScreen = ({ navigation }) => {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
-    StatusBar.setBackgroundColor("black");
     StatusBar.setBarStyle("light-content");
+    if (Platform.OS === "android") {
+      StatusBar.setBackgroundColor("black");
+    }
     const unsubscribe = navigation.addListener("focus", () => {
       const fetchEvents = async () => {
         const eventData = await FirebaseAPI.readEvents();
