@@ -74,7 +74,7 @@ const HomeScreen = ({ navigation, route }) => {
             <Ionicons
               name="location"
               size={30}
-              color={focused ? "orange" : "white"}
+              color={focused ? "royalblue" : "white"}
             />
           ),
         }}
@@ -88,7 +88,7 @@ const HomeScreen = ({ navigation, route }) => {
             <Ionicons
               name="calendar"
               size={30}
-              color={focused ? "orange" : "white"}
+              color={focused ? "royalblue" : "white"}
             />
           ),
         }}

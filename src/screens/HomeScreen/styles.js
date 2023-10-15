@@ -88,8 +88,10 @@ const styles = StyleSheet.create({
     width: "80%",
     height: "80%",
     // alignItems: "center",
-    borderColor: "black",
+    borderColor: "white",
     borderWidth: 1,
+    elevation: 5, // Set the shadow depth/intensity
+    shadowColor: "black", // Set the shadow color
   },
   modalViewTitleText: {
     // flex: 2,
