@@ -5,7 +5,7 @@ class FirebaseAPI {
   // Method to add an event
   static async addEvent(event) {
     try {
-      await db.collection("OtherEvents").add(event.toFirestore());
+      await db.collection("GoodEvents").add(event.toFirestore());
       console.log("Event added successfully");
     } catch (error) {
       console.log("Error adding event:", error);
@@ -16,7 +16,7 @@ class FirebaseAPI {
   static async readEvents() {
     let eventList = [];
     try {
-      const querySnapshot = await db.collection("OtherEvents").get();
+      const querySnapshot = await db.collection("GoodEvents").get();
       querySnapshot.forEach((doc) => {
         // const event = new Event(doc.id, doc.data()["name"]);
         const event = Event.fromFirestore(doc);

@@ -12,6 +12,8 @@ import EventLocationScreen from "./src/screens/EventLocationScreen/EventLocation
 const Stack = createStackNavigator();
 
 const App = () => {
+
+  return (<EventLocationScreen />)
   const [user, setUser] = useState(null);
 
   useEffect(() => {
