@@ -5,13 +5,20 @@ const windowHeight = Dimensions.get("window").height;
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 50,
-    display: "flex",
+    backgroundColor: "black",
+    flexDirection: "column",
     flex: 1,
-    // flexDirection: 'column'
+    padding: 20,
+    paddingTop: 50,
+    justifyContent: "center",
+    alignItems: "center",
+    // height: Dimensions.get("window").height,
+    height: "100%",
+    // position: "absolute",
+    // top: 0,
   },
   list: {
-    position: "absolute",
+    // position: "absolute",
     width: 1.0 * windowWidth,
     // alignItems: 'center'
   },
@@ -19,8 +26,8 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     // alignContent: 'center',
-    marginTop: 10,
-    marginBottom: 10,
+    // marginTop: 10,
+    marginBottom: 20,
     marginLeft: 30,
     marginRight: 30,
     // width: 0.8 * 0.9 * windowWidth,
