@@ -1,6 +1,6 @@
 import LoginScreen from "./src/screens/LoginScreen/LoginScreen";
 import InsideLayout from "./src/screens/index";
-import MapScreen from "./src/screens/MapScreen/MapScreen";
+import StartLayout from "./src/screens/start";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -8,8 +8,6 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { useState, useEffect } from "react";
 
 import { auth } from "./src/firebase/config";
-import CreateEventScreen from "./src/screens/CreateEventScreen/CreateEventScreen";
-
 const Stack = createStackNavigator();
 
 const App = () => {
@@ -28,8 +26,8 @@ const App = () => {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login">
-        {!user ? (
+      <Stack.Navigator initialRouteName="StartLayout">
+        {user ? (
           <Stack.Screen //should be when user exists
             name="InsideStack"
             component={InsideLayout}
@@ -37,8 +35,8 @@ const App = () => {
           />
         ) : (
           <Stack.Screen
-            name="LoginScreen"
-            component={LoginScreen}
+            name="StartLayout"
+            component={StartLayout}
             options={{ headerShown: false }}
           />
         )}
