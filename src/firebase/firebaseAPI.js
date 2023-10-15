@@ -1,14 +1,14 @@
-import { db } from './config';
-import Event from '../data-models/event-model';
+import { db } from "./config";
+import Event from "../data-models/event-model";
 
 class FirebaseAPI {
   // Method to add an event
-  static async addEvent(eventName) {
+  static async addEvent(event) {
     try {
-      await db.collection('Events').add({ name: eventName });
-      console.log('Event added successfully');
+      await db.collection("OtherEvents").add(event.toFirestore());
+      console.log("Event added successfully");
     } catch (error) {
-      console.log('Error adding event:', error);
+      console.log("Error adding event:", error);
     }
   }
 
@@ -16,14 +16,24 @@ class FirebaseAPI {
   static async readEvents() {
     let eventList = [];
     try {
-      const querySnapshot = await db.collection('OtherEvents').get();
+      const querySnapshot = await db.collection("OtherEvents").get();
       querySnapshot.forEach((doc) => {
-        const event = new Event(doc.id, doc.data()['name'])
-        eventList.push(event)
+        const event = new Event(doc.id, doc.data()["name"]);
+        eventList.push(event);
       });
-      return eventList 
+
+      const sortedEventList = eventList.sort((a, b) => {
+        if (a.name < b.name) {
+          return -1; // a comes before b
+        }
+        if (a.name > b.name) {
+          return 1; // a comes after b
+        }
+        return 0; // a and b are equal
+      });
+      return sortedEventList;
     } catch (error) {
-      console.log('Error reading events:', error);
+      console.log("Error reading events:", error);
       return [];
     }
   }
