@@ -6,7 +6,7 @@ const windowHeight = Dimensions.get("window").height;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
+    top: 0.05 * windowHeight,
     alignItems: "center",
     backgroundColor: "black",
   },
@@ -19,11 +19,6 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     color: "white",
   },
-  wtmText: {
-    fontSize: 90,
-    color: "white",
-    marginTop: 0.15 * windowHeight,
-  },
   buttonContainer: {
     backgroundColor: "white",
     borderRadius: 12,
@@ -34,14 +29,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginBottom: 20,
     marginTop: 10,
-  },
-  inputContainer: {
-    alignItems: "center",
-    justifyContent: "center",
-    position: "absolute",
-    top: 0.2 * windowHeight,
-    left: 0,
-    right: 0,
   },
 });
 
