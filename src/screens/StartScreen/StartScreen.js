@@ -18,7 +18,7 @@ export default function StartScreen({ navigation }) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
-  const randomNumber = generateRandomNumber();
+  const randomNumber = useRef(generateRandomNumber()).current;
   
   const styles = StyleSheet.create({
     container: {
@@ -39,8 +39,6 @@ export default function StartScreen({ navigation }) {
         opacity: neonLight
     },
   });
-
-  const [showLoginButton, setShowLoginButton] = useState(false);
 
   useEffect(() => {
 
@@ -83,7 +81,6 @@ export default function StartScreen({ navigation }) {
       ]).start()
 
     const timer = setTimeout(() => {
-      setShowLoginButton(true);
       navigation.navigate("Login Screen");
     }, 5000);
 
@@ -99,14 +96,6 @@ export default function StartScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <Animated.Text style={[styles.neon]}>WTM</Animated.Text>
-      {showLoginButton && (
-        <Button
-          title="Login"
-          onPress={() => {
-            navigation.navigate("Login Screen");
-          }}
-        ></Button>
-      )}
     </View>
   );
 }
