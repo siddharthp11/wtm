@@ -10,8 +10,7 @@ export default function StartScreen({ navigation }) {
     'font': require('../../../assets/fonts/mexcellent-rg.otf'),
   });
 
-  let neonLight = useRef(new Animated.Value(0)).current;
-  const colors = ['red', 'orange', 'yellow', 'green', 'cyan', 'indigo', 'violet']
+  const colors = ['red', 'orange', 'yellow', 'green', 'cyan', 'violet']
   generateRandomNumber = () => { 
     const min = 0; 
     const max = colors.length - 1; 
@@ -19,6 +18,7 @@ export default function StartScreen({ navigation }) {
 };
 
   const randomNumber = useRef(generateRandomNumber()).current;
+  let neonLight = useRef(new Animated.Value(0)).current;
   
   const styles = StyleSheet.create({
     container: {
@@ -81,7 +81,10 @@ export default function StartScreen({ navigation }) {
       ]).start()
 
     const timer = setTimeout(() => {
-      navigation.navigate("Login Screen");
+      navigation.navigate("Login Screen", {
+        color: colors[randomNumber],
+        font: 'font',
+      });
     }, 5000);
 
     return () => {
