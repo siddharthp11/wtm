@@ -1,10 +1,10 @@
-import { Animated, StyleSheet, Text, View, Dimensions } from 'react-native';
-import React, { useRef, useEffect } from 'react';
+import { Animated, StyleSheet, Text, View, Dimensions, Button } from 'react-native';
+import React, { useRef, useEffect, useState } from 'react';
 import { useFonts } from 'expo-font';
 
 
 
-export default function StartScreen() {
+export default function StartScreen({ navigation }) {
 
   const [fontsLoaded] = useFonts({
     'font': require('../../../assets/fonts/mexcellent-rg.otf'),
@@ -39,6 +39,8 @@ export default function StartScreen() {
         opacity: neonLight
     },
   });
+
+  const [showLoginButton, setShowLoginButton] = useState(false);
 
   useEffect(() => {
 
