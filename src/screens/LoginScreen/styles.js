@@ -17,6 +17,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     margin: 10,
     paddingLeft: 10,
+    color: "white"
   },
   wtmText: {
     fontSize: 90,

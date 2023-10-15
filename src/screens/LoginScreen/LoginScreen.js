@@ -25,7 +25,7 @@ export default function LoginScreen({ route, navigation}) {
       borderColor: "gray",
       borderWidth: 1,
       margin: 10,
-      paddingLeft: 10,
+      paddingLeft: 10
     },
     wtmText: {
       fontSize: 90,
