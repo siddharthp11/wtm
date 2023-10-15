@@ -28,8 +28,14 @@ const HomeScreen = ({ navigation }) => {
         <FlatList
           style={styles.list}
           data={events}
-          renderItem={(event) => <ListItem item={event.item} />}
-          keyExtractor={(event) => event.id}
+          renderItem={(event) => {
+            // console.log(event);
+            return <ListItem item={event.item} />;
+          }}
+          keyExtractor={(event) => {
+            console.log(event);
+            return event.id;
+          }}
         />
         <FloatingActionButton
           onPressItem={() => navigation.navigate("Make a Move")}

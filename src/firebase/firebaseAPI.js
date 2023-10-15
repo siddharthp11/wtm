@@ -18,7 +18,8 @@ class FirebaseAPI {
     try {
       const querySnapshot = await db.collection("OtherEvents").get();
       querySnapshot.forEach((doc) => {
-        const event = new Event(doc.id, doc.data()["name"]);
+        // const event = new Event(doc.id, doc.data()["name"]);
+        const event = Event.fromFirestore(doc);
         eventList.push(event);
       });
 
