@@ -1,5 +1,6 @@
 import LoginScreen from "./src/screens/LoginScreen/LoginScreen";
 import InsideLayout from "./src/screens/index";
+import StartLayout from "./src/screens/start";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -23,8 +24,8 @@ const App = () => {
   // login screen if user exists, else move in index.js
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login">
-        {!user ? (
+      <Stack.Navigator initialRouteName="StartLayout">
+        {user ? (
           <Stack.Screen //should be when user exists
             name="InsideStack"
             component={InsideLayout}
@@ -32,8 +33,8 @@ const App = () => {
           />
         ) : (
           <Stack.Screen
-            name="LoginScreen"
-            component={LoginScreen}
+            name="StartLayout"
+            component={StartLayout}
             options={{ headerShown: false }}
           />
         )}
