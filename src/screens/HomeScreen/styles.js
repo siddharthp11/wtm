@@ -61,6 +61,57 @@ const styles = StyleSheet.create({
     borderColor: "black",
     borderWidth: 1,
   },
+  modalViewTitleText: {
+    // flex: 2,
+    color: "orange",
+    textShadowColor: "orange",
+    textShadowOffset: { width: 0, height: 0 }, // Adjust the offset as needed
+    textShadowRadius: 30, // Adjust the radius to control the glow intensity
+    fontSize: 25,
+    margin: 10,
+    textAlign: "center",
+  },
+  modalViewText: {
+    margin: 5,
+    marginLeft: 15,
+    // flex: 1,
+    color: "orange",
+    textShadowColor: "orange",
+    textShadowOffset: { width: 0, height: 0 }, // Adjust the offset as needed
+    textShadowRadius: 10, // Adjust the radius to control the glow intensity
+    fontSize: 16,
+  },
+  modalViewCloseButtonView: {
+    position: "absolute",
+    margin: 5,
+    width: "10%",
+    height: "10%",
+    top: 5,
+    left: 5,
+    // backgroundColor: "red",
+  },
+  modalViewMoveButtonView: {
+    position: "absolute",
+    margin: 5,
+    alignSelf: "center", // Horizontally centered
+    width: "100%",
+    // transform: "translateX(-50%)",
+    height: 40,
+    bottom: 10,
+    right: 10,
+    flex: 1,
+    alignContent: "center",
+  },
+  mapContainer: {
+    // margin: 5,
+    marginTop: 40,
+    marginBottom: 20,
+    // alignItems: "center",
+    // flex: 3,
+    width: "100%",
+    height: "50%",
+    // backgroundColor: "black",
+  },
 });
 
 export default styles;

@@ -4,19 +4,16 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 import styles from "./styles";
 import Event from "../../data-models/event-model";
 import FirebaseAPI from "../../firebase/firebaseAPI";
-import MapView, { Marker } from "react-native-maps";
+import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
+import mapstyle from "./mapstyle.json"
 
 const CreateEventScreen = ({ navigation }) => {
   const [eventName, setEventName] = useState("");
-  // const [eventLocation, setEventLocation] = useState('');
   const [eventDate, setEventDate] = useState(new Date());
   const [eventTag, setEventTag] = useState("");
-
   const [layoutReady, setLayoutReady] = useState(false);
-
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [showTimePicker, setShowTimePicker] = useState(false);
-
   const [eventLocation, setEventLocation] = useState({
     latitude: 33.7750794627932,
     longitude: -84.39693929627538,
@@ -154,6 +151,8 @@ const CreateEventScreen = ({ navigation }) => {
       >
         {layoutReady && (
           <MapView
+            provider={PROVIDER_GOOGLE}
+
             style={styles.mapContainer}
             initialRegion={{
               latitude: 33.7750794627932,
@@ -162,6 +161,7 @@ const CreateEventScreen = ({ navigation }) => {
               longitudeDelta: 0.012477971613407135,
             }}
             onRegionChange={onRegionChange}
+            customMapStyle={mapstyle}
           >
             {showLocationsOfInterest()}
             <Marker

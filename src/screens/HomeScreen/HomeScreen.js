@@ -7,6 +7,7 @@ import FloatingActionButton from "./components/FloatingActionButton";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { StyleSheet, Dimensions } from "react-native";
 // import Icon from "react-native-vector-icons/FontAwesome";
+import EventLocationScreen from "../EventLocationScreen/EventLocationScreen";
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
@@ -28,11 +29,11 @@ const eventStyles = StyleSheet.create({
   },
 });
 
-const MapScreen = () => (
-  <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-    <Text>Map</Text>
-  </View>
-);
+// const MapScreen = () => (
+//   <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+//     <Text>Map</Text>
+//   </View>
+// );
 
 const EventScreen = ({ navigation }) => {
   const [events, setEvents] = useState([]);
@@ -54,8 +55,14 @@ const EventScreen = ({ navigation }) => {
         <FlatList
           style={eventStyles.list}
           data={events}
-          renderItem={(event) => <ListItem item={event.item} />}
-          keyExtractor={(event) => event.id}
+          renderItem={(event) => {
+            // console.log(event);
+            return <ListItem item={event.item} />;
+          }}
+          keyExtractor={(event) => {
+            console.log(event.date);
+            return event.id;
+          }}
         />
         <FloatingActionButton
           onPressItem={() => navigation.navigate("Make a Move")}
@@ -72,7 +79,7 @@ const HomeScreen = ({ navigation }) => {
     <Tab.Navigator>
       <Tab.Screen
         name="Map"
-        component={MapScreen}
+        component={EventLocationScreen}
         options={{ headerShown: false }}
       />
       <Tab.Screen
