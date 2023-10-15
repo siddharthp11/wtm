@@ -8,8 +8,6 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { useState, useEffect } from "react";
 
 import { auth } from "./src/firebase/config";
-import CreateEventScreen from "./src/screens/CreateEventScreen/CreateEventScreen";
-
 const Stack = createStackNavigator();
 
 const App = () => {

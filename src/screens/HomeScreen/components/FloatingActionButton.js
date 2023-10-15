@@ -15,8 +15,8 @@ const FloatingActionButton = (props) => (
           position: 2,
         },
         {
-          text: "Something Else",
-          name: "something_else",
+          text: "create event",
+          name: "create-event",
           position: 1,
         },
       ]}
