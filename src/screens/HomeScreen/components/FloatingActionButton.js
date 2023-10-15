@@ -1,7 +1,7 @@
 import React from "react";
 import { View } from "react-native";
 import { FloatingAction } from "react-native-floating-action";
-import styles from '../styles'; 
+import styles from "../styles";
 import { auth } from "../../../firebase/config";
 
 const FloatingActionButton = (props) => (
@@ -18,14 +18,13 @@ const FloatingActionButton = (props) => (
           text: "Something Else",
           name: "something_else",
           position: 1,
-        }
+        },
       ]}
       onPressItem={(name) => {
-        if (name === 'logout'){
-          auth.signOut()
+        if (name === "logout") {
+          auth.signOut();
         } else {
-          console.log(name);
-          props.onPressItem()
+          props.onPressItem();
         }
       }}
     />
