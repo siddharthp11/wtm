@@ -1,11 +1,25 @@
 import { Animated, StyleSheet, Text, View, Dimensions } from 'react-native';
 import React, { useRef, useEffect } from 'react';
+import { useFonts } from 'expo-font';
+
 
 
 export default function StartupScreen() {
 
-  let neonLight = useRef(new Animated.Value(0)).current;
+  const [fontsLoaded] = useFonts({
+    'font': require('../../../assets/fonts/mexcellent-rg.otf'),
+  });
 
+  let neonLight = useRef(new Animated.Value(0)).current;
+  const colors = ['red', 'orange', 'yellow', 'green', 'cyan', 'indigo', 'violet']
+  generateRandomNumber = () => { 
+    const min = 0; 
+    const max = colors.length - 1; 
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+};
+
+  const randomNumber = generateRandomNumber();
+  
   const styles = StyleSheet.create({
     container: {
       backgroundColor: 'black',
@@ -16,36 +30,60 @@ export default function StartupScreen() {
       width: Dimensions.get('window').width,
     },
     neon: {
-        fontSize: 64,
-        color: 'violet',
-        textShadowColor: 'violet',
+        fontSize: 90,
+        fontFamily: 'font',
+        color: colors[randomNumber],
+        textShadowColor: colors[randomNumber],
         textShadowOffset: { width: 0, height: 0 },
         textShadowRadius: 30,
+        opacity: neonLight
     },
   });
 
   useEffect(() => {
-    // Animated.loop(
+
       Animated.sequence([
         Animated.timing(neonLight, {
-          toValue: 10,
+          toValue: 1,
           duration: 500,
-          useNativeDriver: true,
+          useNativeDriver: false,
         }),
         Animated.timing(neonLight, {
           toValue: 0,
           duration: 100,
-          useNativeDriver: true,
+          useNativeDriver: false,
         }),
         Animated.timing(neonLight, {
-          toValue: 10,
+          toValue: 1,
+          duration: 500,
+          useNativeDriver: false,
+        }),
+        Animated.timing(neonLight, {
+          toValue: 0,
           duration: 100,
-          useNativeDriver: true,
+          useNativeDriver: false,
+        }),
+        Animated.timing(neonLight, {
+          toValue: 1,
+          duration: 500,
+          useNativeDriver: false,
+        }),
+        Animated.timing(neonLight, {
+          toValue: 0,
+          duration: 100,
+          useNativeDriver: false,
+        }),
+        Animated.timing(neonLight, {
+          toValue: 1,
+          duration: 500,
+          useNativeDriver: false,
         }),
       ]).start()
-    //   { iterations: -1 }
-    // ).start();
   }, []);
+
+  if (!fontsLoaded) {
+    return undefined;
+  }
 
 
   return (
