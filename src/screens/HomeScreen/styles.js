@@ -25,15 +25,36 @@ const styles = StyleSheet.create({
     marginRight: 30,
     // width: 0.8 * 0.9 * windowWidth,
     height: 0.1 * windowHeight,
-    color: "white",
-    borderColor: "white",
+    color: "orange",
+    borderColor: "orange",
     borderRadius: 5,
     borderWidth: 1,
     margin: 10,
+    shadowColor: "orange",
+    shadowOpacity: 0.8,
+    shadowRadius: 2,
+    shadowOffset: {
+      height: 1,
+      width: 1,
+    },
   },
   textInListItem: {
     textAlign: "center", // Center text horizontally
+    fontSize: 20,
+    color: "orange",
+    textShadowColor: "orange",
+    textShadowOffset: { width: 0, height: 0 }, // Adjust the offset as needed
+    textShadowRadius: 30, // Adjust the radius to control the glow intensity
+    paddingTop: 8,
+  },
+  dateInListItem: {
     color: "white",
+    textShadowColor: "white",
+    textShadowOffset: { width: 0, height: 0 }, // Adjust the offset as needed
+    textShadowRadius: 30, // Adjust the radius to control the glow intensity
+    fontSize: 12,
+    margin: 10,
+    textAlign: "center",
   },
   createEventButton: {
     position: "absolute",
