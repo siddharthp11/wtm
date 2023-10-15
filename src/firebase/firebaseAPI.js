@@ -31,8 +31,6 @@ class FirebaseAPI {
         }
         return 0; // a and b are equal
       });
-
-      console.log(sortedEventList);
       return sortedEventList;
     } catch (error) {
       console.log("Error reading events:", error);

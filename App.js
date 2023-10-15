@@ -19,7 +19,7 @@ const App = () => {
 
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
-      console.log("User: " + user);
+      // console.log("User: " + user);
       setUser(user);
     });
   }, []);

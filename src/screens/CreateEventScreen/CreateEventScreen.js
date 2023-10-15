@@ -85,15 +85,6 @@ const CreateEventScreen = ({ navigation }) => {
           onChangeText={(text) => setEventName(text)}
         />
       </View>
-      {/* <View style={styles.inputContainer}>
-      <Text style={styles.textHeading}>Event Location:</Text>
-      <TextInput style={styles.input}
-          placeholder="Enter Event Location"
-          value={eventLocation}
-          onChangeText={text => setEventLocation(text)}
-      />
-      </View> */}
-
       <View style={styles.inputContainer}>
         <Text style={styles.textHeading}>Event Date:</Text>
         <TextInput
@@ -120,7 +111,6 @@ const CreateEventScreen = ({ navigation }) => {
           }}
         />
       )}
-
       <View style={styles.inputContainer}>
         <Text style={styles.textHeading}>Event Time:</Text>
         <TextInput
@@ -132,7 +122,6 @@ const CreateEventScreen = ({ navigation }) => {
           onTouchStart={() => setShowTimePicker(true)}
         />
       </View>
-
       {showTimePicker && (
         <DateTimePicker
           value={eventDate}
@@ -147,7 +136,6 @@ const CreateEventScreen = ({ navigation }) => {
           }}
         />
       )}
-
       <View style={styles.inputContainer}>
         <Text style={styles.textHeading}>Event Tag:</Text>
         <TextInput
@@ -185,13 +173,14 @@ const CreateEventScreen = ({ navigation }) => {
           </MapView>
         )}
       </View>
-
-      <Button
-        style={styles.createEventButton}
-        disabled={eventName.length == 0 || eventLocation.length == 0}
-        title="Create Event"
-        onPress={handleCreateEvent}
-      />
+      <View style={styles.inputContainer}>
+        <Button
+          style={styles.createEventButton}
+          disabled={eventName.length == 0 || eventLocation.length == 0}
+          title="Create Event"
+          onPress={handleCreateEvent}
+        />
+      </View>
     </View>
   );
 };
