@@ -1,106 +1,90 @@
-import {
-  View,
-  Text,
-  StyleSheet,
-  Animated,
-  Dimensions,
-  Button,
-} from "react-native";
-import React, { useRef, useEffect, useState } from "react";
+import { Animated, StyleSheet, Text, View, Dimensions, Button } from 'react-native';
+import React, { useRef, useEffect, useState } from 'react';
+import { useFonts } from 'expo-font';
 
-const StartScreen = ({ navigation }) => {
-  let neonLight = useRef(new Animated.Value(0)).current;
-  const colors = [
-    "red",
-    "orange",
-    "yellow",
-    "green",
-    "cyan",
-    "indigo",
-    "violet",
-  ];
-  generateRandomNumber = () => {
-    const min = 0;
-    const max = colors.length - 1;
+
+
+export default function StartScreen({ navigation }) {
+
+  const [fontsLoaded] = useFonts({
+    'font': require('../../../assets/fonts/mexcellent-rg.otf'),
+  });
+
+  const colors = ['red', 'orange', 'yellow', 'green', 'cyan', 'violet']
+  generateRandomNumber = () => { 
+    const min = 0; 
+    const max = colors.length - 1; 
     return Math.floor(Math.random() * (max - min + 1)) + min;
-  };
+};
 
-  const randomNumber = generateRandomNumber();
-
+  const randomNumber = useRef(generateRandomNumber()).current;
+  let neonLight = useRef(new Animated.Value(0)).current;
+  
   const styles = StyleSheet.create({
     container: {
-      backgroundColor: "black",
-      alignItems: "center",
-      justifyContent: "center",
-      position: "absolute",
-      height: Dimensions.get("window").height,
-      width: Dimensions.get("window").width,
+      backgroundColor: 'black',
+      alignItems: 'center',
+      justifyContent: 'center',
+      position: 'absolute',
+      height: Dimensions.get('window').height,
+      width: Dimensions.get('window').width,
     },
     neon: {
-      fontSize: 64,
-      color: colors[randomNumber],
-      textShadowColor: colors[randomNumber],
-      textShadowOffset: { width: 0, height: 0 },
-      textShadowRadius: 30,
-      opacity: neonLight,
+        fontSize: 90,
+        fontFamily: 'font',
+        color: colors[randomNumber],
+        textShadowColor: colors[randomNumber],
+        textShadowOffset: { width: 0, height: 0 },
+        textShadowRadius: 30,
+        opacity: neonLight
     },
   });
 
-  const [showLoginButton, setShowLoginButton] = useState(false);
-
   useEffect(() => {
-    Animated.sequence([
-      Animated.timing(neonLight, {
-        toValue: 1,
-        duration: 500,
-        useNativeDriver: true,
-      }),
-      Animated.timing(neonLight, {
-        toValue: 0,
-        duration: 100,
-        useNativeDriver: true,
-      }),
-      Animated.timing(neonLight, {
-        toValue: 1,
-        duration: 500,
-        useNativeDriver: true,
-      }),
-      Animated.timing(neonLight, {
-        toValue: 0,
-        duration: 100,
-        useNativeDriver: true,
-      }),
-      Animated.timing(neonLight, {
-        toValue: 1,
-        duration: 500,
-        useNativeDriver: true,
-      }),
-      Animated.timing(neonLight, {
-        toValue: 0,
-        duration: 100,
-        useNativeDriver: true,
-      }),
-      Animated.timing(neonLight, {
-        toValue: 1,
-        duration: 500,
-        useNativeDriver: true,
-      }),
-      Animated.timing(neonLight, {
-        toValue: 0,
-        duration: 100,
-        useNativeDriver: true,
-      }),
-      Animated.timing(neonLight, {
-        toValue: 1,
-        duration: 500,
-        useNativeDriver: true,
-      }),
-    ]).start();
 
-    // Timer logic
+      Animated.sequence([
+        Animated.timing(neonLight, {
+          toValue: 1,
+          duration: 500,
+          useNativeDriver: false,
+        }),
+        Animated.timing(neonLight, {
+          toValue: 0,
+          duration: 100,
+          useNativeDriver: false,
+        }),
+        Animated.timing(neonLight, {
+          toValue: 1,
+          duration: 500,
+          useNativeDriver: false,
+        }),
+        Animated.timing(neonLight, {
+          toValue: 0,
+          duration: 100,
+          useNativeDriver: false,
+        }),
+        Animated.timing(neonLight, {
+          toValue: 1,
+          duration: 500,
+          useNativeDriver: false,
+        }),
+        Animated.timing(neonLight, {
+          toValue: 0,
+          duration: 100,
+          useNativeDriver: false,
+        }),
+        Animated.timing(neonLight, {
+          toValue: 1,
+          duration: 500,
+          useNativeDriver: false,
+        }),
+      ]).start()
+
     const timer = setTimeout(() => {
-      setShowLoginButton(true);
-      navigation.navigate("Login Screen");
+      navigation.navigate("Login Screen", {
+        color: colors[randomNumber],
+        font: 'font',
+      });
     }, 5000);
 
     return () => {
@@ -108,19 +92,13 @@ const StartScreen = ({ navigation }) => {
     };
   }, []);
 
+  if (!fontsLoaded) {
+    return undefined;
+  }
+
   return (
     <View style={styles.container}>
       <Animated.Text style={[styles.neon]}>WTM</Animated.Text>
-      {showLoginButton && (
-        <Button
-          title="Login"
-          onPress={() => {
-            navigation.navigate("Login Screen");
-          }}
-        ></Button>
-      )}
     </View>
   );
-};
-
-export default StartScreen;
+}

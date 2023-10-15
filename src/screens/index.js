@@ -8,7 +8,7 @@ const InnerStack = createStackNavigator();
 export default function InsideLayout() {
   return (
     <InnerStack.Navigator initialRouteName="Home">
-      <InnerStack.Screen name="What's the Move?" component={HomeScreen} />
+      <InnerStack.Screen name="What's the Move?" component={HomeScreen} options={{ headerShown: false }} />
       <InnerStack.Screen name="Make a Move" component={CreateEventScreen} />
     </InnerStack.Navigator>
   );

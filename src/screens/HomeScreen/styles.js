@@ -25,15 +25,15 @@ const styles = StyleSheet.create({
     marginRight: 30,
     // width: 0.8 * 0.9 * windowWidth,
     height: 0.1 * windowHeight,
-    color: "black",
-    borderColor: "black",
+    color: "white",
+    borderColor: "white",
     borderRadius: 5,
     borderWidth: 1,
     margin: 10,
   },
   textInListItem: {
     textAlign: "center", // Center text horizontally
-    color: "black",
+    color: "white",
   },
   createEventButton: {
     position: "absolute",
@@ -59,11 +59,9 @@ const styles = StyleSheet.create({
     padding: 20,
     width: "80%",
     height: "80%",
-    // alignItems: "center",
+    alignItems: "center",
     borderColor: "black",
     borderWidth: 1,
-    // flex: 1,
-    // flexDirection: "column",
   },
   modalViewTitleText: {
     // flex: 2,
