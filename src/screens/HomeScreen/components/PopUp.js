@@ -42,7 +42,14 @@ const PopUp = ({ visible, onClose, item }) => (
         <View style={styles.modalViewCloseButtonView}>
           <Button
             style={styles.modalViewCloseButton}
-            title="Close"
+            title="X"
+            onPress={onClose}
+          />
+        </View>
+        <View style={styles.modalViewMoveButtonView}>
+          <Button
+            // style={styles.modalViewCloseButton}
+            title="That's a Move!"
             onPress={onClose}
           />
         </View>
