@@ -21,8 +21,11 @@ const ListItem = ({ item }) => {
           return openPopUp(item);
         }}
       >
-        <View style={styles.listItem}>
+        <View style={styles.listItem} elevation={5}>
           <Text style={styles.textInListItem}>{item.name}</Text>
+          <Text style={styles.dateInListItem}>
+            Date: {new Date(1000 * item.date?.seconds).toDateString()}
+          </Text>
         </View>
       </TouchableOpacity>
       <PopUp
