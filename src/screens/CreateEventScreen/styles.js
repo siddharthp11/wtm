@@ -37,6 +37,14 @@ const styles = StyleSheet.create({
   },
   mapContainer: {
     flex: 3,
+    shadowColor: 'orange',  // color of the glow
+    shadowOffset: {
+      width: 0,
+      height: 0,
+    },
+    shadowOpacity: 0.8, // opacity of the glow
+    shadowRadius: 10, // radius to give a glow effect
+    elevation: 10 // this is for Android
     // width: "100%",
     // height: "50%",
     // backgroundColor: "black",

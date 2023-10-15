@@ -3,6 +3,7 @@ import { Button, Text, StyleSheet, View } from "react-native";
 import React, { useState, useEffect } from "react";
 import mapstyle from './mapstyle.json'
 import FirebaseAPI from "../../firebase/firebaseAPI";
+import PopUp from "./components/PopUp";
 
 
 export default function EventLocationScreen() {
@@ -23,10 +24,12 @@ export default function EventLocationScreen() {
                         description={item.tag}
                     >
                         <Callout tooltip={true}>
-                            <View style={styles.calloutView}>
+                            {/* <View style={styles.calloutView}>
                                 <Text style={styles.calloutText}>{item.name}</Text>
                                 <Text style={{ color: 'green' }}>{item.tag}</Text>
-                            </View>
+                            </View> */}
+
+                            <PopUp item={item}></PopUp>
                         </Callout>
                     </Marker>
                 );
