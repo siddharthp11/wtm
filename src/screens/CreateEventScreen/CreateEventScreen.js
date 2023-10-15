@@ -5,7 +5,7 @@ import styles from "./styles";
 import Event from "../../data-models/event-model";
 import FirebaseAPI from "../../firebase/firebaseAPI";
 import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
-import mapstyle from "./mapstyle.json"
+import mapstyle from "./mapstyle.json";
 
 const CreateEventScreen = ({ navigation }) => {
   const [eventName, setEventName] = useState("");
@@ -78,6 +78,7 @@ const CreateEventScreen = ({ navigation }) => {
         <TextInput
           style={styles.input}
           placeholder="Enter Event Name"
+          placeholderTextColor="orange"
           value={eventName}
           onChangeText={(text) => setEventName(text)}
         />
@@ -87,6 +88,7 @@ const CreateEventScreen = ({ navigation }) => {
         <TextInput
           style={styles.input}
           placeholder="Select Event Date"
+          placeholderTextColor="orange"
           value={eventDate.toDateString()}
           caretHidden={true} // Hide the cursor
           selection={{ start: 0, end: 0 }} // Hide text selection
@@ -113,6 +115,7 @@ const CreateEventScreen = ({ navigation }) => {
         <TextInput
           style={styles.input}
           placeholder="Select Event Time"
+          placeholderTextColor="orange"
           value={eventDate.toTimeString()}
           caretHidden={true} // Hide the cursor
           selection={{ start: 0, end: 0 }} // Hide text selection
@@ -134,10 +137,11 @@ const CreateEventScreen = ({ navigation }) => {
         />
       )}
       <View style={styles.inputContainer}>
-        <Text style={styles.textHeading}>Event Tag:</Text>
+        <Text style={styles.textHeading}>Event Tag (Optional):</Text>
         <TextInput
           style={styles.input}
           placeholder="Enter Event Tag"
+          placeholderTextColor="orange"
           value={eventTag}
           onChangeText={(text) => setEventTag(text)}
         />
@@ -152,7 +156,6 @@ const CreateEventScreen = ({ navigation }) => {
         {layoutReady && (
           <MapView
             provider={PROVIDER_GOOGLE}
-
             style={styles.mapContainer}
             initialRegion={{
               latitude: 33.7750794627932,
@@ -173,11 +176,11 @@ const CreateEventScreen = ({ navigation }) => {
           </MapView>
         )}
       </View>
-      <View style={styles.inputContainer}>
+      <View style={styles.createEventButton}>
         <Button
-          style={styles.createEventButton}
-          disabled={eventName.length == 0 || eventLocation.length == 0}
-          title="Create Event"
+          // style={styles.createEventButton}
+          disabled={eventName.length == 0}
+          title="Make a Move"
           onPress={handleCreateEvent}
         />
       </View>
