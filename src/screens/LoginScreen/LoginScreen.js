@@ -18,6 +18,14 @@ export default function LoginScreen({ route, navigation }) {
       alignItems: "center",
       backgroundColor: "black",
     },
+    input: {
+      width: 300,
+      height: 40,
+      borderColor: "gray",
+      borderWidth: 1,
+      margin: 10,
+      paddingLeft: 10
+    },
     wtmText: {
       fontSize: 90,
       fontFamily: font,
