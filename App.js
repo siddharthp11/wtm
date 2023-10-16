@@ -1,36 +1,25 @@
 import AppLayout from "./src/screens/AppLayout";
 import PreLogin from "./src/screens/PreLogin";
 
-import { useState, useEffect } from "react";
-import { auth } from "./src/firebase/config";
+import { useContext } from "react";
+import { AuthContext, AuthProvider } from "./src/firebase/FirebaseAuthProvider";
 
 import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
 
-const Stack = createStackNavigator();
+export default App => {
+  return (
+    <AuthProvider>
+      <AppNavigation />
+    </AuthProvider>
+  )
+}
 
-const App = () => {
-  const [user, setUser] = useState(null);
-
-  useEffect(() => {
-    auth.onAuthStateChanged((user) => setUser(user))
-  }, []);
-
+const AppNavigation = () => {
+  const { user } = useContext(AuthContext)
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName={user ? "AppLayout" : "PreLogin"}>
-        <Stack.Screen
-          name="PreLogin"
-          component={PreLogin}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="AppLayout"
-          component={AppLayout}
-          options={{ headerShown: false }}
-        />
-      </Stack.Navigator>
+      {user ? <AppLayout /> : <PreLogin />}
     </NavigationContainer>
   );
 };
-export default App;
+
