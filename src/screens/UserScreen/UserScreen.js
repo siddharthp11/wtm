@@ -1,10 +1,13 @@
 import { View, StyleSheet, Text } from "react-native";
 
+
 export default function UserScreen() {
+
     return (
         <View style={styles.container}>
             <View style={styles.friendsContainer}>
                 <Text style={styles.friendsText}>Hi</Text>
+
             </View>
         </View>
     )

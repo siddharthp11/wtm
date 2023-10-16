@@ -24,11 +24,6 @@ export default function EventLocationScreen({ navigation }) {
                             description={item.tag}
                         >
                             <Callout tooltip={true}>
-                                {/* <View style={styles.calloutView}>
-                                    <Text style={styles.calloutText}>{item.name}</Text>
-                                    <Text style={{ color: 'green' }}>{item.tag}</Text>
-                                </View> */}
-
                                 <PopUp item={item}></PopUp>
                             </Callout>
                         </Marker>

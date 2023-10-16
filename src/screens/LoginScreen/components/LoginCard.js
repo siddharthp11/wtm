@@ -6,46 +6,31 @@ import {
   TouchableOpacity,
   Text,
 } from "react-native";
-import { auth } from "../../../firebase/config";
+import { AuthContext } from "../../../firebase/FirebaseAuthProvider";
+import { useContext, useState } from "react";
 import styles from "../styles";
-
-import { useNavigation } from '@react-navigation/native';
-import { useState } from "react";
 
 
 export default LoginCard = (props) => {
   const { color } = props;
+  const { authSignIn, authSignUp } = useContext(AuthContext)
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const navigation = useNavigation();
 
   const signIn = async () => {
     setLoading(true);
-    try {
-      const response = await auth.signInWithEmailAndPassword(email, password);
-      console.log(response)
-      navigation.navigate('AppLayout')
-    } catch (error) {
-      alert("Sign in failed: " + error.message);
-    } finally {
-      setLoading(false);
-    }
+    authSignIn(email, password)
+      .catch((error) => alert(error))
+      .finally(() => setLoading(false))
   };
 
   const signUp = async () => {
     setLoading(true);
-    try {
-      const response = await auth.createUserWithEmailAndPassword(
-        email,
-        password
-      );
-    } catch (error) {
-      alert("Sign up failed: " + error.message);
-    } finally {
-      setLoading(false);
-    }
+    authSignUp(email, password)
+      .catch((error) => alert(error))
+      .finally(() => setLoading(false))
   };
 
   return (

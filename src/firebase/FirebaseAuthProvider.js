@@ -1,6 +1,6 @@
-import 'firebase/compat/auth'
+// import 'firebase/compat/auth'
 import { createContext, useState, useEffect } from 'react'
-import firebaseConfig from './config'
+import firebaseConfig from "../../keys/firebase_key.json"
 import firebase from 'firebase/compat'
 
 const AuthContext = createContext()
@@ -25,22 +25,30 @@ const AuthProvider = ({ children }) => {
         return () => unsubscribeFromAuth()
     })
 
-    const login = async (email, password) => {
+    const authSignIn = (email, password) => new Promise((resolve, reject) => {
         if (!authExists) {
-            return false;
+            reject('Auth not intitialised.');
+            return;
         }
-        try {
-            const credentials = await firebase.auth().signInWithEmailAndPassword(email, password);
-            return true;
-        } catch (error) {
-            return false
+        firebase.auth().signInWithEmailAndPassword(email, password)
+            .then((credentials) => resolve(true))
+            .catch((error) => reject(error.message));
+    });
+
+    const authSignUp = (email, password) => new Promise((resolve, reject) => {
+        if (!authExists) {
+            reject('Auth not intitialised.');
+            return;
         }
-    };
+        firebase.auth().createUserWithEmailAndPassword(email, password)
+            .then((credentials) => resolve(true))
+            .catch((error) => reject(error.message));
+    });
 
     return (
 
         //returns an authcontext provider with the user and login function
-        <AuthContext.Provider value={{ user, login }} >
+        <AuthContext.Provider value={{ user, authSignIn, authSignUp }} >
             {children}
         </AuthContext.Provider>
     )
