@@ -2,14 +2,14 @@ import React from "react";
 import { Modal, View, Text, Button } from "react-native";
 import styles from "../styles";
 import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
-import mapstyle from "../mapstyle.json";
+import mapstyle from "../../mapstyle.json";
 
 const PopUp = ({ visible, onClose, item }) => (
   <Modal
     animationType="slide"
     transparent={true}
     visible={visible}
-    onRequestClose={() => {}}
+    onRequestClose={() => { }}
   >
     <View style={styles.centeredView}>
       <View style={styles.modalView}>
@@ -36,7 +36,7 @@ const PopUp = ({ visible, onClose, item }) => (
             key={item.id}
             coordinate={item.location}
             title={item.name}
-            // description={item.tag}
+          // description={item.tag}
           />
         </MapView>
         <View style={styles.modalViewCloseButtonView}>

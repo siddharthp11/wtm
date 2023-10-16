@@ -1,14 +1,13 @@
 import { createStackNavigator } from "@react-navigation/stack";
-import { NavigationContainer } from "@react-navigation/native";
-import HomeScreen from "./HomeScreen/HomeScreen";
+import EventScreen from "./ViewEventScreen/EventScreen";
 import CreateEventScreen from "./CreateEventScreen/CreateEventScreen";
 
 const InnerStack = createStackNavigator();
 
-export default function InsideLayout() {
+export default function EventScreenStack() {
   return (
-    <InnerStack.Navigator initialRouteName="Home">
-      <InnerStack.Screen name="What's the Move?" component={HomeScreen} options={{ headerShown: false }} />
+    <InnerStack.Navigator initialRouteName="What's the Move?">
+      <InnerStack.Screen name="What's the Move?" component={EventScreen} options={{ headerShown: false }} />
       <InnerStack.Screen name="Make a Move" component={CreateEventScreen} options={{ headerShown: false }} />
     </InnerStack.Navigator>
   );

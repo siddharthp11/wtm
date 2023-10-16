@@ -1,47 +1,36 @@
-import LoginScreen from "./src/screens/LoginScreen/LoginScreen";
-import InsideLayout from "./src/screens/index";
-import StartLayout from "./src/screens/start";
+import AppLayout from "./src/screens/AppLayout";
+import PreLogin from "./src/screens/PreLogin";
+
+import { useState, useEffect } from "react";
+import { auth } from "./src/firebase/config";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
-import { useState, useEffect } from "react";
-
-import { auth } from "./src/firebase/config";
-import EventLocationScreen from "./src/screens/EventLocationScreen/EventLocationScreen";
 const Stack = createStackNavigator();
 
 const App = () => {
-
   const [user, setUser] = useState(null);
-  useEffect(() => {
-    auth.onAuthStateChanged((user) => {
-      // console.log("User: " + user);
-      setUser(user);
-    });
-  }, []);
 
-  // login screen if user exists, else move in index.js
+  useEffect(() => {
+    auth.onAuthStateChanged((user) => setUser(user))
+  }, []);
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="StartLayout">
-        {user ? (
-          <Stack.Screen //should be when user exists
-            name="InsideStack"
-            component={InsideLayout}
-            options={{ headerShown: false }}
-          />
-        ) : (
-          <Stack.Screen
-            name="StartLayout"
-            component={StartLayout}
-            options={{ headerShown: false }}
-          />
-        )}
+      <Stack.Navigator initialRouteName={user ? "PreLogin" : "AppLayout"}>
+        <Stack.Screen
+          name="PreLogin"
+          component={PreLogin}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="AppLayout"
+          component={AppLayout}
+          options={{ headerShown: false }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
-    // <CreateEventScreen></CreateEventScreen>
   );
 };
 export default App;

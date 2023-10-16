@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { View, Text, TextInput, Button } from "react-native";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import styles from "./styles";
-import Event from "../../data-models/event-model";
-import FirebaseAPI from "../../firebase/firebaseAPI";
+import Event from "../../../data-models/event-model";
+import FirebaseAPI from "../../../firebase/firebaseAPI";
 import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
-import mapstyle from "./mapstyle.json";
+import mapstyle from "../mapstyle.json";
 
 const CreateEventScreen = ({ navigation }) => {
   const [eventName, setEventName] = useState("");
@@ -97,19 +97,26 @@ const CreateEventScreen = ({ navigation }) => {
       </View>
 
       {showDatePicker && (
-        <DateTimePicker
-          value={eventDate}
-          mode="date" // You can use "date" or "time" here as well
-          is24Hour={true}
-          display="default"
-          onChange={(event, selectedDate) => {
-            setShowDatePicker(false);
-            if (event.type === "set") {
-              setEventDate(selectedDate);
-            }
-          }}
-        />
-      )}
+        <View style={{
+          backgroundColor: 'purple', borderRadius: 10, width: 100, marginLeft: 50, shadowColor: "purple",
+          shadowOffset: { width: 0, height: 0 }, shadowRadius: 10,
+        }}>
+          < DateTimePicker
+            style={{ placeholderTextColor: 'red' }}
+            value={eventDate}
+            mode="date" // You can use "date" or "time" here as well
+            is24Hour={true}
+            display="default"
+            onChange={(event, selectedDate) => {
+              setShowDatePicker(false);
+              if (event.type === "set") {
+                setEventDate(selectedDate);
+              }
+            }}
+          />
+        </View>
+      )
+      }
       <View style={styles.inputContainer}>
         <Text style={styles.textHeading}>Event Time:</Text>
         <TextInput
@@ -122,20 +129,25 @@ const CreateEventScreen = ({ navigation }) => {
           onTouchStart={() => setShowTimePicker(true)}
         />
       </View>
-      {showTimePicker && (
-        <DateTimePicker
-          value={eventDate}
-          mode="time" // You can use "Time" or "time" here as well
-          is24Hour={false}
-          display="default"
-          onChange={(event, selectedTime) => {
-            setShowTimePicker(false);
-            if (event.type === "set") {
-              setEventDate(selectedTime);
-            }
-          }}
-        />
-      )}
+      {
+        showTimePicker && (
+          <View style={{ backgroundColor: 'purple', borderRadius: 10, width: 100, marginLeft: 50 }}>
+            <DateTimePicker
+              value={eventDate}
+              mode="time" // You can use "Time" or "time" here as well
+              is24Hour={false}
+              display="default"
+              onChange={(event, selectedTime) => {
+                setShowTimePicker(false);
+                if (event.type === "set") {
+                  setEventDate(selectedTime);
+                }
+              }}
+            />
+          </View>
+
+        )
+      }
       <View style={styles.inputContainer}>
         <Text style={styles.textHeading}>Event Tag (Optional):</Text>
         <TextInput

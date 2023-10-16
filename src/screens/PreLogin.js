@@ -1,12 +1,11 @@
-import { createStackNavigator } from "@react-navigation/stack";
-import { NavigationContainer } from "@react-navigation/native";
 
 import StartScreen from "./StartScreen/StartScreen";
 import LoginScreen from "./LoginScreen/LoginScreen";
 
+import { createStackNavigator } from "@react-navigation/stack";
 const StartStack = createStackNavigator();
 
-export default function StartLayout() {
+export default function PreLogin() {
   return (
     <StartStack.Navigator initialRouteName="Start Screen">
       <StartStack.Screen
