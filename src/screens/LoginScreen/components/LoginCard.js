@@ -6,9 +6,12 @@ import {
   TouchableOpacity,
   Text,
 } from "react-native";
-import { useState } from "react";
 import { auth } from "../../../firebase/config";
 import styles from "../styles";
+
+import { useNavigation } from '@react-navigation/native';
+import { useState } from "react";
+
 
 export default LoginCard = (props) => {
   const { color } = props;
@@ -16,12 +19,14 @@ export default LoginCard = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const navigation = useNavigation();
 
   const signIn = async () => {
     setLoading(true);
     try {
       const response = await auth.signInWithEmailAndPassword(email, password);
       console.log(response)
+      navigation.navigate('AppLayout')
     } catch (error) {
       alert("Sign in failed: " + error.message);
     } finally {
