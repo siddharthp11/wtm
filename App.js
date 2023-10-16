@@ -18,7 +18,7 @@ const App = () => {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName={user ? "PreLogin" : "AppLayout"}>
+      <Stack.Navigator initialRouteName={user ? "AppLayout" : "PreLogin"}>
         <Stack.Screen
           name="PreLogin"
           component={PreLogin}

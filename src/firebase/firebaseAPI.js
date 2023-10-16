@@ -1,5 +1,5 @@
 import { db } from "./config";
-import Event from "../data-models/event-model";
+import Event from "../data-models/event";
 
 class FirebaseAPI {
   // Method to add an event

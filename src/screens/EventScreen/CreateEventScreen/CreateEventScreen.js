@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { View, Text, TextInput, Button } from "react-native";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import styles from "./styles";
-import Event from "../../../data-models/event-model";
+import Event from "../../../data-models/event";
 import FirebaseAPI from "../../../firebase/firebaseAPI";
 import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import mapstyle from "../mapstyle.json";
