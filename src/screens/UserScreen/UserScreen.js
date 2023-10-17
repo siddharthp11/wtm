@@ -32,7 +32,7 @@ export default function UserScreen({ navigation }) {
                 <TextInput
                     style={styles.searchBar}
                     value={searchQuery}
-                    placeholder="Search Email"
+                    placeholder="Users by Email (No Search) -"
                     placeholderTextColor="white"
                     autoCapitalize="none"
                     onChangeText={(text) => setSearchQuery(text)}
