@@ -32,7 +32,7 @@ const AuthProvider = ({ children }) => {
         }
         firebase.auth().signInWithEmailAndPassword(email, password)
             .then((credentials) => resolve(true))
-            .catch((error) => reject(error.message));
+            .catch((error) => reject(error));
     });
 
     const authSignUp = (email, password) => new Promise((resolve, reject) => {
@@ -41,14 +41,34 @@ const AuthProvider = ({ children }) => {
             return;
         }
         firebase.auth().createUserWithEmailAndPassword(email, password)
-            .then((credentials) => resolve(true))
-            .catch((error) => reject(error.message));
+            .then((credentials) => {
+                firebase.firestore().collection('Users')
+                    .doc(credentials.user.uid)
+                    .set({
+                        email: credentials.user.email,
+                        uid: credentials.user.uid,
+                        friends: []
+                    })
+                    .then(resolve(true))
+                    .catch(error => reject(error))
+            })
+            .catch((error) => reject(error));
     });
+
+
+    const signOut = () => new Promise((resolve, reject) => {
+        firebase.auth().signOut()
+            .then(() => {
+                setUser(null)
+                resolve(true)
+            })
+            .catch((error) => reject(error))
+    })
 
     return (
 
         //returns an authcontext provider with the user and login function
-        <AuthContext.Provider value={{ user, authSignIn, authSignUp }} >
+        <AuthContext.Provider value={{ user, authSignIn, authSignUp, signOut }} >
             {children}
         </AuthContext.Provider>
     )
