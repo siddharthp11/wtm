@@ -70,8 +70,8 @@ const AuthProvider = ({ children }) => {
     //this query sometimes crashes firebase, probably due to rate limit. Maybe local cacheing will help, esp for the event screen. 
     const searchUsers = (query) => new Promise((resolve, reject) => {
         const queryRef = firebase.firestore().collection('Users')
-            .where('email', '>=', query)
-            .where('email', '<=', query + '\uf8ff')
+        // .where('email', '>=', query)
+        // .where('email', '<=', query + '\uf8ff')
 
         queryRef.get()
             .then((userMatches) => {
