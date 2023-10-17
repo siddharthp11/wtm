@@ -1,32 +1,22 @@
-import { View, StyleSheet, Text } from "react-native";
+import { View, Text } from "react-native";
+import styles from "./styles";
+import { AuthContext } from "../../firebase/FirebaseAuthProvider";
+import { useContext, useEffect } from "react";
 
-
-export default function UserScreen() {
+export default function UserScreen({ navigation }) {
+    const { user } = useContext(AuthContext)
+    useEffect(() => {
+        const unsubscribe = navigation.addListener('focus', () => console.log(user['uid']))
+        return unsubscribe;
+    }, [navigation])
 
     return (
         <View style={styles.container}>
             <View style={styles.friendsContainer}>
-                <Text style={styles.friendsText}>Hi</Text>
+                <Text style={styles.friendsText}>{"Hi " + user['email']}</Text>
 
             </View>
         </View>
     )
 }
 
-const styles = StyleSheet.create({
-    container: {
-        backgroundColor: "black",
-        flexDirection: "column",
-        flex: 1,
-        padding: 20,
-    },
-    friendsContainer: {
-        backgroundColor: "black",
-        flexDirection: "column",
-        flex: 1,
-        padding: 20,
-    },
-    friendsText: {
-        color: 'white'
-    }
-})
