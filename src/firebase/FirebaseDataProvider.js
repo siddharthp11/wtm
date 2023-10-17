@@ -15,12 +15,15 @@ const DataProvider = ({ children }) => {
         setFirestoreExists(true)
     })
 
+
     const getEvents = () => new Promise((resolve, reject) => {
         if (!firestoreExists) {
             reject('Firestore not initialised')
         }
         firebase.firestore().collection('GoodEvents').get()
             .then((snapshot) => {
+
+                //this function can be passed in by the caller, along with the path to collection. 
                 let eventList = [];
                 snapshot.forEach((doc) => {
                     eventList.push(Event.fromFirestore(doc))
