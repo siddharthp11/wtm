@@ -42,6 +42,8 @@ const AuthProvider = ({ children }) => {
         }
         firebase.auth().createUserWithEmailAndPassword(email, password)
             .then((credentials) => {
+
+                // this should be served by the database? 
                 firebase.firestore().collection('Users')
                     .doc(credentials.user.uid)
                     .set({
@@ -65,10 +67,24 @@ const AuthProvider = ({ children }) => {
             .catch((error) => reject(error))
     })
 
-    return (
+    //this query sometimes crashes firebase, probably due to rate limit. Maybe local cacheing will help, esp for the event screen. 
+    const searchUsers = (query) => new Promise((resolve, reject) => {
+        const queryRef = firebase.firestore().collection('Users')
+            .where('email', '>=', query)
+            .where('email', '<=', query + '\uf8ff')
 
+        queryRef.get()
+            .then((userMatches) => {
+                userMatches = userMatches.docs.map((doc) => ({ uid: doc.id, email: doc.data().email }))
+                resolve(userMatches)
+            })
+            .catch((error) => reject(error))
+            .finally(() => console.log('attempted search query.'))
+    })
+
+    return (
         //returns an authcontext provider with the user and login function
-        <AuthContext.Provider value={{ user, authSignIn, authSignUp, signOut }} >
+        <AuthContext.Provider value={{ user, searchUsers, authSignIn, authSignUp, signOut }} >
             {children}
         </AuthContext.Provider>
     )

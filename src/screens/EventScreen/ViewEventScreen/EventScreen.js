@@ -15,11 +15,14 @@ export default EventScreen = ({ navigation }) => {
 
     const { getEvents } = useContext(DataContext)
 
+
     useEffect(() => {
         StatusBar.setBarStyle("light-content");
         if (Platform.OS === "android") {
             StatusBar.setBackgroundColor("black");
         }
+
+        //have to change this because of rate limit. instead when new event is created update firebase and local cache. also add a refresh scroll for events created by others. 
         const unsubscribe = navigation.addListener("focus", () => {
             setLoading(true)
             getEvents()
