@@ -1,43 +1,45 @@
 import MapView, { PROVIDER_GOOGLE, Marker, Callout } from "react-native-maps";
-import { Button, Text, StyleSheet, View } from "react-native";
-import React, { useState, useEffect } from "react";
+import { View } from "react-native";
+import React, { useState, useEffect, useContext } from "react";
 import mapstyle from './mapstyle.json'
-import FirebaseAPI from "../../firebase/firebaseAPI";
+import { DataContext } from "../../firebase/FirebaseDataProvider";
 import PopUp from "./components/PopUp";
+import styles from "./styles";
 
 
-export default function EventLocationScreen({ navigation }) {
+export default function MapScreen({ navigation }) {
+    const { getEvents } = useContext(DataContext)
 
     const [events, setEvents] = useState([]);
     const [loading, setLoading] = useState(true);
+
     useEffect(() => {
         const unsubscribe = navigation.addListener("focus", () => {
-            const fetchEvents = async () => {
-                let eventData = await FirebaseAPI.readEvents();
-                eventData = eventData.map((item, index) => {
-                    return (
-                        <Marker
-                            key={index}
-                            pinColor='green'
-                            coordinate={item.location}
-                            title={item.name}
-                            description={item.tag}
-                        >
-                            <Callout tooltip={true}>
-                                <PopUp item={item}></PopUp>
-                            </Callout>
-                        </Marker>
-                    );
-                });
-                setEvents(eventData);
-                setLoading(false);
-            };
-            fetchEvents();
+            setLoading(true)
+            getEvents()
+                .then((eventList) => {
+                    const eventData = eventList.map((item, index) => {
+                        return (
+                            <Marker
+                                key={index}
+                                pinColor='green'
+                                coordinate={item.location}
+                                title={item.name}
+                                description={item.tag}
+                            >
+                                <Callout tooltip={true}>
+                                    <PopUp item={item}></PopUp>
+                                </Callout>
+                            </Marker>
+                        );
+                    });
+                    setEvents(eventData);
+                    setLoading(false);
+                })
+                .catch(error => alert(error))
         });
         return unsubscribe;
     }, [navigation]);
-
-
 
     return (<View>
         <MapView
@@ -58,22 +60,4 @@ export default function EventLocationScreen({ navigation }) {
 
 }
 
-const styles = StyleSheet.create({
-    mapContainer: {
-        width: "100%",
-        height: "100%",
-    },
-    calloutView: {
-        backgroundColor: 'blue',
-        borderRadius: 20,
-        width: 170,
-        height: 100,
-        alignItems: 'left',
-        justifyContent: 'left',
-        padding: 10,
-    },
-    calloutText: {
-        color: 'orange',
-        fontSize: 16,
-    },
-})
+

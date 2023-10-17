@@ -1,27 +1,33 @@
-import React, { useEffect, useState } from "react";
+import { DataContext } from "../../../firebase/FirebaseDataProvider";
+
+import React, { useContext, useEffect, useState } from "react";
+
 import { SafeAreaView, FlatList, View, StatusBar, ActivityIndicator } from "react-native";
-import FirebaseAPI from "../../../firebase/firebaseAPI";
-import styles from "./styles";
+
 import ListItem from "./components/ListItem";
 import FloatingActionButton from "./components/FloatingActionButton";
+import styles from "./styles";
+
 
 export default EventScreen = ({ navigation }) => {
     const [events, setEvents] = useState([]);
     const [loading, setLoading] = useState(true);
+
+    const { getEvents } = useContext(DataContext)
 
     useEffect(() => {
         StatusBar.setBarStyle("light-content");
         if (Platform.OS === "android") {
             StatusBar.setBackgroundColor("black");
         }
-        navigation.addListener("focus", () => {
-            const fetchEvents = async () => {
-                const eventData = await FirebaseAPI.readEvents();
-                setEvents(eventData);
-                setLoading(false);
-            };
-            fetchEvents();
+        const unsubscribe = navigation.addListener("focus", () => {
+            setLoading(true)
+            getEvents()
+                .then((eventList) => setEvents(eventList))
+                .catch((error) => alert(error))
+            setLoading(false)
         });
+        return unsubscribe
     }, [navigation]);
 
     return (

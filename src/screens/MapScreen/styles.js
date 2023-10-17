@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 
-const styles = StyleSheet.create({
+export default styles = StyleSheet.create({
     centeredView: {
         // flex: 1,
         height: "100%",
@@ -39,6 +39,21 @@ const styles = StyleSheet.create({
         textShadowRadius: 10, // Adjust the radius to control the glow intensity
         fontSize: 16,
     },
+    mapContainer: {
+        width: "100%",
+        height: "100%",
+    },
+    calloutView: {
+        backgroundColor: 'blue',
+        borderRadius: 20,
+        width: 170,
+        height: 100,
+        alignItems: 'left',
+        justifyContent: 'left',
+        padding: 10,
+    },
+    calloutText: {
+        color: 'orange',
+        fontSize: 16,
+    },
 })
-
-export default styles;

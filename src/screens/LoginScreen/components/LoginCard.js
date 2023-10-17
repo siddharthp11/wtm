@@ -19,14 +19,14 @@ export default LoginCard = (props) => {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const signIn = async () => {
+  const signIn = () => {
     setLoading(true);
     authSignIn(email, password)
       .catch((error) => alert(error))
       .finally(() => setLoading(false))
   };
 
-  const signUp = async () => {
+  const signUp = () => {
     setLoading(true);
     authSignUp(email, password)
       .catch((error) => alert(error))

@@ -21,14 +21,25 @@ const DataProvider = ({ children }) => {
         }
         firebase.firestore().collection('GoodEvents').get()
             .then((snapshot) => {
+                let eventList = [];
                 snapshot.forEach((doc) => {
-                    console.log(Event.fromFirestore(doc))
+                    eventList.push(Event.fromFirestore(doc))
                 })
-                resolve(true)
+                resolve(eventList)
             })
             .catch((error) => {
                 reject(error)
             })
+    })
+
+    const addEvent = (data) => new Promise((resolve, reject) => {
+        if (!firestoreExists) {
+            reject('Firestore not initialised')
+        }
+        firebase.firestore().collection('GoodEvents')
+            .add(data.toFirestore())
+            .then(() => resolve(true))
+            .catch(error => reject(error))
     })
 
     if (!firestoreExists) {
@@ -36,7 +47,7 @@ const DataProvider = ({ children }) => {
     }
 
     return (
-        <DataContext.Provider value={{ getEvents }}>
+        <DataContext.Provider value={{ addEvent, getEvents }}>
             {children}
         </DataContext.Provider>
     )
