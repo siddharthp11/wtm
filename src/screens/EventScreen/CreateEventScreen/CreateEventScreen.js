@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { View, Text, TextInput, Button } from "react-native";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import styles from "./styles";
 import Event from "../../../data-models/event";
-import FirebaseAPI from "../../../firebase/firebaseAPI";
+import { DataContext } from "../../../firebase/FirebaseDataProvider";
 import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import mapstyle from "../mapstyle.json";
 
@@ -11,13 +11,15 @@ const CreateEventScreen = ({ navigation }) => {
   const [eventName, setEventName] = useState("");
   const [eventDate, setEventDate] = useState(new Date());
   const [eventTag, setEventTag] = useState("");
-  const [layoutReady, setLayoutReady] = useState(false);
-  const [showDatePicker, setShowDatePicker] = useState(false);
-  const [showTimePicker, setShowTimePicker] = useState(false);
   const [eventLocation, setEventLocation] = useState({
     latitude: 33.7750794627932,
     longitude: -84.39693929627538,
   });
+
+  const [showDatePicker, setShowDatePicker] = useState(false);
+  const [showTimePicker, setShowTimePicker] = useState(false);
+
+  const { addEvent } = useContext(DataContext)
 
   let locationsOfInterest = [
     {
@@ -38,17 +40,19 @@ const CreateEventScreen = ({ navigation }) => {
     },
   ];
 
-  const handleCreateEvent = () => {
-    const createdEvent = new Event(
-      "",
-      eventName,
-      eventLocation,
-      eventDate,
-      eventTag,
-      true
-    );
-    FirebaseAPI.addEvent(createdEvent);
-    navigation.navigate("What's the Move?");
+  const onRegionChange = (region) => {
+    setEventLocation({
+      latitude: region.latitude,
+      longitude: region.longitude,
+    });
+  };
+
+  const createAndAddEvent = () => {
+    const createdEvent = new Event("", eventName, eventLocation, eventDate, eventTag, true);
+    addEvent(createdEvent)
+      .then(navigation.navigate("What's the Move?"))
+      .catch((error) => alert(error))
+
   };
 
   const showLocationsOfInterest = () => {
@@ -61,13 +65,6 @@ const CreateEventScreen = ({ navigation }) => {
           description={item.description}
         ></Marker>
       );
-    });
-  };
-
-  const onRegionChange = (region) => {
-    setEventLocation({
-      latitude: region.latitude,
-      longitude: region.longitude,
     });
   };
 
@@ -161,39 +158,34 @@ const CreateEventScreen = ({ navigation }) => {
 
       <View
         style={styles.mapContainer}
-        onLayout={() => {
-          setLayoutReady(true);
-        }}
       >
-        {layoutReady && (
-          <MapView
-            provider={PROVIDER_GOOGLE}
-            style={styles.mapContainer}
-            initialRegion={{
-              latitude: 33.7750794627932,
-              latitudeDelta: 0.020592708501247614,
-              longitude: -84.39693929627538,
-              longitudeDelta: 0.012477971613407135,
-            }}
-            onRegionChange={onRegionChange}
-            customMapStyle={mapstyle}
-          >
-            {showLocationsOfInterest()}
-            <Marker
-              draggable
-              coordinate={eventLocation}
-              onDragEnd={(e) => setEventLocation(e.nativeEvent.coordinate)}
-              pinColor="blue"
-            ></Marker>
-          </MapView>
-        )}
+        <MapView
+          provider={PROVIDER_GOOGLE}
+          style={styles.mapContainer}
+          initialRegion={{
+            latitude: 33.7750794627932,
+            latitudeDelta: 0.020592708501247614,
+            longitude: -84.39693929627538,
+            longitudeDelta: 0.012477971613407135,
+          }}
+          onRegionChange={onRegionChange}
+          customMapStyle={mapstyle}
+        >
+          {showLocationsOfInterest()}
+          <Marker
+            draggable
+            coordinate={eventLocation}
+            onDragEnd={(e) => setEventLocation(e.nativeEvent.coordinate)}
+            pinColor="blue"
+          ></Marker>
+        </MapView>
       </View>
       <View style={styles.createEventButton}>
         <Button
           // style={styles.createEventButton}
           disabled={eventName.length == 0}
           title="Make a Move"
-          onPress={handleCreateEvent}
+          onPress={createAndAddEvent}
         />
       </View>
     </View>

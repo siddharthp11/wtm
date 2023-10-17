@@ -1,4 +1,4 @@
-import EventLocationScreen from "./MapScreen/MapScreen";
+import MapScreen from "./MapScreen/MapScreen";
 import EventScreenStack from "./EventScreen/EventScreenStack";
 import UserScreen from "./UserScreen/UserScreen";
 
@@ -7,7 +7,9 @@ import { Ionicons } from "@expo/vector-icons";
 
 const Tab = createBottomTabNavigator();
 
-export default function AppLayout({ navigation, route }) {
+
+
+export default function AppLayout() {
   return (
     <Tab.Navigator
       screenOptions={{
@@ -18,7 +20,7 @@ export default function AppLayout({ navigation, route }) {
     >
       <Tab.Screen
         name="Map"
-        component={EventLocationScreen}
+        component={MapScreen}
         options={{
           headerShown: false,
           tabBarIcon: ({ color, size, focused }) => (
