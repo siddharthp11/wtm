@@ -11,16 +11,11 @@ export default function UserScreen() {
     const { user, signOut, searchUsers } = useContext(AuthContext);
 
     const [showUserPopUp, setShowUserPopUp] = useState(false);
-
     const [loading, setLoading] = useState(false); //two loading state vars: one for search one for friends
     const [searchResults, setSearchResults] = useState([]);
+    const fakeData = [{ uid: '1020', email: 'sam@wtm.com' }, { uid: '1222', email: 'ram@wtm.com' }]
     const [searchQuery, setSearchQuery] = useState("");
 
-    const fakeData = [{ uid: '1020', email: 'sam@wtm.com' }, { uid: '1222', email: 'ram@wtm.com' }]
-
-    const authSignOut = () => {
-        signOut().catch((error) => alert(error));
-    };
 
     const authSearchUsers = () => {
         setLoading(true);
@@ -62,7 +57,7 @@ export default function UserScreen() {
                 />
 
             </View>
-            <Pressable style={styles.signOutButton} onPress={authSignOut}>
+            <Pressable style={styles.signOutButton} onPress={() => signOut().catch((error) => alert(error))}>
                 <Text> Sign Out </Text>
             </Pressable>
         </View>
