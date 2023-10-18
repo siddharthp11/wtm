@@ -10,11 +10,23 @@ export default styles = StyleSheet.create({
         justifyContent: "space-between",
 
     },
-    userText: {
-        marginTop: 10,
-        color: 'white',
+    userContainer: {
+        width: "80%",
         flex: 0.5,
-        fontSize: 20
+        marginBottom: 10,
+        borderRadius: 10,
+        borderWidth: 1,
+        borderColor: 'white'
+    },
+    userTouchable: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+
+    },
+    userText: {
+        color: 'white',
+        fontSize: 15
     },
     searchContainer: {
         width: "80%",
@@ -35,7 +47,7 @@ export default styles = StyleSheet.create({
         borderColor: 'white'
     },
     searchList: {
-        padding: 10,
+        paddingVertical: 10,
     },
     signOutButton: {
         justifyContent: 'center',

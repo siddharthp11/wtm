@@ -21,7 +21,9 @@ export default LoginCard = (props) => {
 
   const signIn = () => {
     setLoading(true);
-    authSignIn(email, password)
+    //test
+    authSignIn('sid@wtm.com', 'password')
+      // authSignIn(email, password)
       .catch((error) => alert(error))
       .finally(() => setLoading(false))
   };

@@ -12,7 +12,9 @@ const Tab = createBottomTabNavigator();
 export default function AppLayout() {
   return (
     <Tab.Navigator
+      initialRouteName="User"
       screenOptions={{
+
         tabBarStyle: {
           backgroundColor: "black",
         },

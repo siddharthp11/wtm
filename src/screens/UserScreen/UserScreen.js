@@ -1,15 +1,22 @@
-import { TextInput, View, Text, Pressable, FlatList } from "react-native";
+import UserPopUp from './components/UserPopUp'
+import FriendListItem from './components/FriendListItem';
+
+import { TextInput, View, Text, Pressable, FlatList, TouchableOpacity } from "react-native";
 import styles from "./styles";
 import { AuthContext } from "../../firebase/FirebaseAuthProvider";
-import { useContext, useEffect, useState } from "react";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { useContext, useState } from "react";
 
-export default function UserScreen({ navigation }) {
+
+export default function UserScreen() {
     const { user, signOut, searchUsers } = useContext(AuthContext);
+
+    const [showUserPopUp, setShowUserPopUp] = useState(false);
 
     const [loading, setLoading] = useState(false); //two loading state vars: one for search one for friends
     const [searchResults, setSearchResults] = useState([]);
     const [searchQuery, setSearchQuery] = useState("");
+
+    const fakeData = [{ uid: '1020', email: 'sam@wtm.com' }, { uid: '1222', email: 'ram@wtm.com' }]
 
     const authSignOut = () => {
         signOut().catch((error) => alert(error));
@@ -27,25 +34,30 @@ export default function UserScreen({ navigation }) {
 
     return (
         <View style={styles.rootContainer}>
-            <Text style={styles.userText}>{"Hello, " + user["email"] + "."}</Text>
+            <View style={styles.userContainer}>
+                <TouchableOpacity style={styles.userTouchable} onPress={() => setShowUserPopUp(true)}>
+                    <Text style={styles.userText}>{"Hello, " + user["email"] + "."}</Text>
+                </TouchableOpacity>
+                <UserPopUp visible={showUserPopUp} onClose={() => setShowUserPopUp(false)} />
+            </View>
+
             <View style={styles.searchContainer}>
                 <TextInput
                     style={styles.searchBar}
                     value={searchQuery}
-                    placeholder="Users by Email (No Search) -"
+                    placeholder="Search User.."
                     placeholderTextColor="white"
                     autoCapitalize="none"
                     onChangeText={(text) => setSearchQuery(text)}
-                    onSubmitEditing={loading ? (() => { }) : authSearchUsers}
+
+                // onSubmitEditing={loading ? (() => { }) : authSearchUsers}
                 />
                 <FlatList
                     style={styles.searchList}
-                    data={loading ? [] : searchResults}
+                    data={loading ? [] : fakeData}
                     keyExtractor={item => item.uid}
                     renderItem={({ item }) => (
-                        <View>
-                            <Text style={{ color: 'white' }}>{item.email}</Text>
-                        </View>
+                        <FriendListItem item={item} />
                     )}
                 />
 
