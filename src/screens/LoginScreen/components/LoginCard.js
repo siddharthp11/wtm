@@ -21,15 +21,15 @@ export default LoginCard = (props) => {
 
   const signIn = () => {
     setLoading(true);
-    authSignIn(email, password)
-      .catch((error) => alert(error))
+    authSignIn('sid@wtm.com', 'password')
+      .catch(error => alert(error))
       .finally(() => setLoading(false))
   };
 
   const signUp = () => {
     setLoading(true);
     authSignUp(email, password)
-      .catch((error) => alert(error))
+      .catch(error => alert(error))
       .finally(() => setLoading(false))
   };
 

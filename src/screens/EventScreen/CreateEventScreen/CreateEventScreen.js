@@ -51,7 +51,7 @@ const CreateEventScreen = ({ navigation }) => {
     const createdEvent = new Event("", eventName, eventLocation, eventDate, eventTag, true);
     addEvent(createdEvent)
       .then(navigation.navigate("What's the Move?"))
-      .catch((error) => alert(error))
+      .catch((error) => alert(error)) //TODO: set loading true and false. 
 
   };
 

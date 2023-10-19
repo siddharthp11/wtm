@@ -28,7 +28,7 @@ export default EventScreen = ({ navigation }) => {
             getEvents()
                 .then((eventList) => setEvents(eventList))
                 .catch((error) => alert(error))
-            setLoading(false)
+                .finally(() => setLoading(false))
         });
         return unsubscribe
     }, [navigation]);

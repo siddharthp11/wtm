@@ -34,9 +34,9 @@ export default function MapScreen({ navigation }) {
                         );
                     });
                     setEvents(eventData);
-                    setLoading(false);
                 })
                 .catch(error => alert(error))
+                .finally(() => setLoading(false))
         });
         return unsubscribe;
     }, [navigation]);
@@ -51,9 +51,10 @@ export default function MapScreen({ navigation }) {
                 longitudeDelta: 0.12477971613407135,
             }}
             style={styles.mapContainer}
-            customMapStyle={mapstyle}
+            customMapStyle={mapstyle} //imagine adding a listener to events to make it animate
         >
             {loading ? [] : events}
+
         </MapView>
     </View>
     )
