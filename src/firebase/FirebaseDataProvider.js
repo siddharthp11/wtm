@@ -15,35 +15,17 @@ const DataProvider = ({ children }) => {
         setFirestoreExists(true)
     })
 
+    // all the following functions return promises, not objects or functions. 
+    // there may be an issue with calls being made before firestore is initialsed.
 
-    const getEvents = () => new Promise((resolve, reject) => {
-        if (!firestoreExists) {
-            reject('Firestore not initialised')
-        }
+    const getEvents = () =>
         firebase.firestore().collection('GoodEvents').get()
-            .then((snapshot) => {
+            .then((snapshot) => snapshot.docs.map(doc => Event.fromFirestore(doc)))  //this function can be passed in by the caller, along with the path to collection. 
 
-                //this function can be passed in by the caller, along with the path to collection. 
-                let eventList = [];
-                snapshot.forEach((doc) => {
-                    eventList.push(Event.fromFirestore(doc))
-                })
-                resolve(eventList)
-            })
-            .catch((error) => {
-                reject(error)
-            })
-    })
 
-    const addEvent = (data) => new Promise((resolve, reject) => {
-        if (!firestoreExists) {
-            reject('Firestore not initialised')
-        }
-        firebase.firestore().collection('GoodEvents')
-            .add(data.toFirestore())
-            .then(() => resolve(true))
-            .catch(error => reject(error))
-    })
+    const addEvent = (data) =>
+        firebase.firestore().collection('GoodEvents').add(data.toFirestore())
+
 
     if (!firestoreExists) {
         return (<ActivityIndicator></ActivityIndicator>)

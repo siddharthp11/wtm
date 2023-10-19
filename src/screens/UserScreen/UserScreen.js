@@ -22,9 +22,7 @@ export default function UserScreen() {
         searchUsers(searchQuery)
             .then((userMatches) => { setSearchResults(userMatches) })
             .catch((error) => alert(error))
-            .finally(() => {
-                setLoading(false)
-            });
+            .finally(() => setLoading(false));
     };
 
     return (
@@ -57,7 +55,10 @@ export default function UserScreen() {
                 />
 
             </View>
-            <Pressable style={styles.signOutButton} onPress={() => signOut().catch((error) => alert(error))}>
+            <Pressable
+                style={styles.signOutButton}
+                onPress={() => signOut().catch((error) => alert(error))} // potentially unsafe call to sign out 
+            >
                 <Text> Sign Out </Text>
             </Pressable>
         </View>
