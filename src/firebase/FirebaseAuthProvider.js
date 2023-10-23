@@ -73,6 +73,7 @@ const AuthProvider = ({ children }) => {
         // .where('email', '>=', query)
         // .where('email', '<=', query + '\uf8ff')
 
+        // KHIVI - the should be done within the store not in app.
         queryRef.get()
             .then((userMatches) => {
                 userMatches = userMatches.docs.map((doc) => ({ uid: doc.id, email: doc.data().email }))

@@ -8,6 +8,8 @@ import { Ionicons } from "@expo/vector-icons";
 const Tab = createBottomTabNavigator();
 
 
+// KHIVI helper function to generate Tab.Screen so reduce code repetion.
+// helper takes parameters like name, etc...
 
 export default function AppLayout() {
   return (

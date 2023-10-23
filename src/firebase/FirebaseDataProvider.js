@@ -8,7 +8,6 @@ const DataContext = createContext()
 const DataProvider = ({ children }) => {
     const [firestoreExists, setFirestoreExists] = useState(false)
     useEffect(() => {
-
         if (!firebase.apps.length) {
             firebase.initializeApp(firebaseConfig)
         }
@@ -22,8 +21,8 @@ const DataProvider = ({ children }) => {
         }
         firebase.firestore().collection('GoodEvents').get()
             .then((snapshot) => {
-
                 //this function can be passed in by the caller, along with the path to collection. 
+                // KHIIV use a MAP to react eventList
                 let eventList = [];
                 snapshot.forEach((doc) => {
                     eventList.push(Event.fromFirestore(doc))
